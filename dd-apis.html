@@ -21,69 +21,27 @@
   </td>
   <td>
 <p><font size="-1">Dit is het eerste concept van de nieuwe Digitale Delta web site. Hij is nog in ontwikkeling (zowel qua inhoud als qua layout),
-en heeft per 1 januari 2019 de oude website www.digitaldelta.nu vervangen.</p>
+en heeft in 2019 de oude website www.digitaldelta.nu vervangen.</p>
 <p>This is the first draft for the new Digital Delta web site. Currently it is in Dutch only.<br/>
-However, an English summary is available, and all API-specifications are in English.</font></p>
+The <a href="dd.v201.html">API-specification</a> however is in English.</font></p>
   </td>
  </tr>
 </table>
 
 <p>&nbsp;</p>
 
-<h3>Application Programming Interfaces (API's)</h3>
-
-<p>
-De Digitale Delta specificeert API's voor data-uitwisseling op het gebied van waterkwantiteit en waterkwaliteit/ecologie.
-</p>
-
-<p>
-Waterkwantiteitsdata moet vaak real-time beschikbaar zijn, denk aan golfhoogtemetingen, regenmeters, windmeters en andere telemetrische informatie. Deze informatie wordt doorgaans met een hoge frequentie aangeleverd in tijdsreeksen. Waterkwantiteitsdata kenmerkt zich door een beperkte hoeveelheid metadata (samen te vatten tot grootheid, locatie, tijdspanne) en een grote hoeveelheid tijdstippen met waarden.
-</p>
-
-<p>
-Ecologische data betreft metingen die betrekking hebben op organismen en op de wisselwerking tussen organismen: levensgemeenschappen in en rond het water. Dit betekent dat naast de organismen chemische en fysische kenmerken ontsloten worden. Onder chemische kenmerken worden alle chemische stoffen en samenstellingen gerekend, bijvoorbeeld chloor, zware metalen, (gewassen-)bestrijdingsmiddelen en medicijnen. Onder fysische kenmerken vallen bijvoorbeeld troebelheid, diepte, stroming, zuurgraad, temperatuur, oeverbegroeiing, etc.
-Ecologische data kenmerkt zich een beperkte hoeveelheid data, vaak slechts &eacute;&eacute;n gemeten waarde, en uitvoerige meta-data om de meting te beschrijven.
-</p>
-
-<p>De volgende API's zijn beschikbaar:
-<ul>
-	<li>
-	<b><em>DD-API 1.0</em></b><br/>
-	Dit is de eerste versie van de API, ge richt op het zoeken, vinden en opvragen van tijdreeksen voor waterkwantiteitsdata;
-	</li>
-	<li>
-	<b><em>DD-API 2.0, de opvolger van DD-API 1.0</em></b><br/>
-	DD-API 2.0 richt zich net als 1.0 op tijdreeksen van waterkwantiteitsdata, maar heeft een aantal wijzigingen en uitbreidingen ondergaan.
-	De <em>wijzigingen</em> betreffen vooral het beter volgen van standaarden, zoals <a href="http://www.geojson.org">GeoJSON</a> en de <a href="https://docs.geostandaarden.nl/api/API-Strategie/">API-strategie</a> voor de Nederlandse overheid.<br/>
-	De <em>uitbreidingen</em> zijn gericht op het kunnen opvragen van modelverwachtingen, het in &egrave;&egrave;n tijdserie kunnen leveren van aan elkaar gerelateerde grootheden, en het om kunnen gaan met meetwaarden die uit meerdere sensoren komen.
-	</li>
-	<li>
-	<b><em>DD-ECO-API 1.0</em></b><br/>
-	Deze variant richt zich op het zoeken en opvragen van ecologische data.
-	</li>
-</ul>
-</p>
-
-<p>
-In de volgende paragrafen wordt aangegeven waar de specificaties zijn te vinden.<br/>
-De DD-API's zijn een open source product, waaraan door een groot aantal partijen wordt meegewerkt. Vanwege dit open source karakter zijn de <a href="https://github.com/DigitaleDeltaOrg/dd-api">DD-API-specificaties op GitHub</a> ondergebracht. De specificaties zijn opgesteld in <a href="https://raml.org">RAML</a>.
-</p>
-
-<h3>DD-API 1.0</h3>
-
-<p>
-Deze eerste versie is eind 2016 gespecificeerd, en begin 2017 door een aantal partijen ge&iuml;mplementeerd. Deze versie - zoals gezegd gericht op tijdseries - bevatte met enig kunst- en vliegwerk ook de ecologische data in dit tijdsreeksenformaat. Deze oplossing was echter verre van effici&euml;nt voor het doelgebied van ecologische informatie: door een te beperkte toegang tot de veelheid van meta-data bleken de ecologische gegevens onvoldoende doorzoekbaar. Bij de uitbreiding van 1.0 naar 2.0 is daarom besloten om de ecologische data apart te behandelen (zie 'DD-ECO-API' hieronder).
-</p>
-
-<p>
-De specificaties van DD-API-1.0 bevinden zich in de master-branch van de (ondertussen gearchiveerde want niet meer actieve) dd-api-spec repository op GitHub:<br/>
-<a href="https://github.com/DigitaleDeltaOrg/dd-api-spec/tree/master">https://github.com/DigitaleDeltaOrg/dd-api-spec/tree/master</a>.
-Uit de daarin aanwezige RAML-specificatie is een HTML-pagina gegenereerd met daarin de <a href="dd.v10.html">documentatie van DD-API 1.0</a>.
-</p>
-
 <h3>DD-API 2.0</h3>
 
-<p>Bij de ontwikkeling van 2.0 is gezorgd voor het beter aansluiten op standaarden, zoals <a href="http://www.geojson.org">GeoJSON</a> en de <a href="https://aandeslagmetdeomgevingswet.nl/digitaal-stelsel/nieuws-dso/nieuws/api-uri-strategie">API-strategie</a> van de DSO. Daarnaast zijn er een aantal uitbreidingen geweest ten behoeve van:
+<p>
+De Digitale Delta specificeert web service API's (Application Programming Interfaces) voor data-uitwisseling t.b.v. het waterbeheer.
+Deze API-specificaties zijn een open source product, waaraan door een groot aantal partijen wordt meegewerkt. Vanwege dit open source karakter zijn de specificaties op GitHub ondergebracht. De specificaties zijn opgesteld in RAML (zie <a href="https://raml.org">raml.org</a> voor de beschrijving van deze specificatietaal).
+</p>
+
+<p>
+De meest ge&iuml;mplementeerde en gebruikte Digitale Delta API is versie 2.0, kort gezegd <a href="dd.v201.html"><b>DD-API 2.0</b></a>. Hiermee kunnen tijdseries opgevraagd worden bij een databron, zowel metingen als modelresulten. Het gaat dan met name om waterkwantiteitsdata, zoals waterstanden, debieten, golfgegevens, regenmeters, et cetera.
+Waterkwantiteitsdata kenmerkt zich door een beperkte hoeveelheid metadata (samen te vatten tot grootheid, locatie, tijdspanne) en een grote hoeveelheid tijdstippen met waarden.
+</p>
+<p>Bij de ontwikkeling van DD-API 2.0 is, ten opzichte van versie 1.0, gezorgd voor het beter aansluiten op standaarden, zoals <a href="http://www.geojson.org">GeoJSON</a> en de <a href="https://aandeslagmetdeomgevingswet.nl/digitaal-stelsel/nieuws-dso/nieuws/api-uri-strategie">API-strategie</a> van de DSO. Daarnaast zijn er een aantal uitbreidingen geweest ten behoeve van:
 <ul>
 	<li>
 	het opvragen van modelverwachtingen, waarbij ook de resultaten van zogenaamde ensemble-runs kunnen worden opgevraagd;
@@ -98,38 +56,71 @@ Uit de daarin aanwezige RAML-specificatie is een HTML-pagina gegenereerd met daa
 <font size="-1">(Nadere beschrijving van deze uitbreidingen volgt binnenkort.)</font>
 </p>
 
+<p>De documentatie van de actuele versie van de DD-API (2.0.1) is te vinden in <a href="dd.v201.html">dd.v201.html</a>.</p>
 <p>
-De DD-API is bedoeld voor het zoeken, vinden en opvragen van waterbeheergegevens. Een deel van de toepassingen ligt echter in het operationeel beheer van watersystemen, en bij dat operationeel beheer is het van belang dat de betrokken systemen en gebruikers slechts gegevens gebruiken die afgestempeld zijn als valide, en die te allen tijde beschikbaar zijn.<br/>
-Om deze operationele systemen te voorzien van deze operationele data is er een speciale set zeer afgebakende opvraag-verzoeken gedefinieerd. Deze operationele variant van de DD-API is DD-OPER genoemd, en is niets anders dan een andere syntax voor het bevragen van de databronnen, waarbij het 'vrij doorzoeken' niet mogelijk is. De reponse van de DD-OPER is identiek aan die van de DD-API, maar bevat minder velden: het deel van de meta-data dat voor het vrij doorzoeken van belang is wordt weggelaten.
-</p>
-
-<p>
-De specificaties van DD-API 2.0 en DD-OPER 2.0 bevinden zich in de dd-api repository op GitHub:<br/>
+Deze html-documentatie is gegenereerd uit de formele RAML-specificaties. De specificaties zijn opgesteld door de Digitale Delta technische werkgroep, en zijn een open source product @@@ staan in de dd-api repository op GitHub:
 <a href="https://github.com/DigitaleDeltaOrg/dd-api">https://github.com/DigitaleDeltaOrg/dd-api</a>
 </p>
 
-<p>Uit de daarin aanwezige RAML-specificaties zijn HTML-pagina's gegenereerd met daarin:
+<p>
+Opmerking: de specificaties van DD-API 2.0 zijn compleet en afgerond. De documentatie is echter nog niet helemaal volledig. Er volgen nog extra beschrijvingen (met name voorbeelden van gebruik).
+</p>
+
+<p/>
+
+<h3>Gerelateerde API's</h3>
+
+<p>Naast bovengenoemde DD-API zijn de volgende API's beschikbaar:
 <ul>
 	<li>
-	de <a href="dd.v201.html">documentatie van DD-API 2.0</a>;
+	<b><em>DD-API 1.0</em></b><br/>
+	Dit is de eerste versie van de DD-API, gerichtop het zoeken, vinden en opvragen van tijdreeksen voor zowel waterkwantiteitsdata als waterkwaliteitsdata
 	</li>
 	<li>
-	de <a href="dd-oper.v201.html">documentatie van DD-OPER 2.0</a>.
+	<b><em>DD-OPER</em></b><br/>
+	Deze API is qua response gelijk aan de DD-API, maar is veel beperkter in de manier van bevragen, omdat hij gerichtis op OPERationele systemen.
+	</li>
+	<li>
+	<b><em>DD-ECO-API 1.0</em></b><br/>
+	Deze variant richt zich op het zoeken en opvragen van ecologische data.
 	</li>
 </ul>
 </p>
 
 <p>
-Opmerking: de specificaties van DD-API 2.0 en DD-OPER 2.0 zijn compleet en afgerond. De documentatie is echter nog niet helemaal volledig. Er volgen nog extra beschrijvingen (met name voorbeelden van gebruik).
+In de volgende paragrafen worden deze gerelateerde API's kort langsgelopen.<br/>
 </p>
 
-<h3>DD-ECO-API 1.0</h3>
-
-<font size="-1">(Nadere beschrijving van het specifieke van ecologische data volgt binnenkort.)</font>
+<h4>DD-API 1.0</h4>
 
 <p>
-De specificaties van de DD-ECO-API zijn te vinden in master-branch van de <a href="https://github.com/DigitaleDeltaOrg/dd-eco-api-specs">dd-eco-api-specs repository</a> op GitHub:<br/>
-<a href="https://github.com/DigitaleDeltaOrg/dd-eco-api-specs">https://github.com/DigitaleDeltaOrg/dd-eco-api-specs</a>
+Deze eerste versie van de DD-API is eind 2016 gespecificeerd, en begin 2017 door een aantal partijen ge&iuml;mplementeerd. Deze versie - zoals gezegd gericht op tijdseries - bevatte met enig kunst- en vliegwerk ook de ecologische data in dit tijdsreeksenformaat. Deze oplossing was echter verre van effici&euml;nt voor het doelgebied van ecologische informatie: door een te beperkte toegang tot de veelheid van meta-data bleken de ecologische gegevens onvoldoende doorzoekbaar. Bij de uitbreiding van 1.0 naar 2.0 is daarom besloten om de ecologische data apart te behandelen (zie 'DD-ECO-API' hieronder).
+</p>
+
+<p>
+De specificaties van DD-API-1.0 bevinden zich in de master-branch van de (ondertussen gearchiveerde want niet meer actieve) dd-api-spec repository op GitHub:<br/>
+<a href="https://github.com/DigitaleDeltaOrg/dd-api-spec/tree/master">https://github.com/DigitaleDeltaOrg/dd-api-spec/tree/master</a>.
+Uit de daarin aanwezige RAML-specificatie is een HTML-pagina gegenereerd met daarin de <a href="dd.v10.html">documentatie van DD-API 1.0</a>.
+</p>
+
+<h4>DD-OPER</h4>
+
+<p>
+De DD-API is bedoeld voor het zoeken, vinden en opvragen van waterbeheergegevens. Een deel van de toepassingen ligt echter in het operationeel beheer van watersystemen, en bij dat operationeel beheer is het van belang dat de betrokken systemen en gebruikers slechts gegevens gebruiken die afgestempeld zijn als valide, en die te allen tijde beschikbaar zijn.<br/>
+Om deze operationele systemen te voorzien van deze operationele data is door RWS een speciale set afgebakende opvraagmogelijkheden gedefinieerd. Deze operationele variant van de DD-API is DD-OPER genoemd, en is niets anders dan een andere syntax voor het bevragen van de databronnen, waarbij het 'vrij doorzoeken' niet mogelijk is. De reponse van de DD-OPER is identiek aan die van de DD-API, maar bevat minder velden: het deel van de meta-data dat voor het vrij doorzoeken van belang is wordt weggelaten.
+</p>
+
+<p>De documentatie van de actuele versie van de DD-OPER (versie 2.0.1, deze is altijd gelijk aan die van de DD-API) is te vinden in <a href="dd-oper.v201.html">dd-oper.v201.html</a>.</p>
+<p>
+Deze html-documentatie is gegenereerd uit de formele RAML-specificaties. Deze zijn opgesteld door RWS, in samenwerking met de Digitale Delta technische werkgroep, en vormen onderdeel van de dd-api repository op GitHub:
+<a href="https://github.com/DigitaleDeltaOrg/dd-api">https://github.com/DigitaleDeltaOrg/dd-api</a>
+</p>
+
+<h3>DD-ECO-API 1.0, voor ecologische data</h3>
+
+<p>
+Ecologische data betreft metingen die betrekking hebben op organismen en op de wisselwerking tussen organismen: levensgemeenschappen in en rond het water. Dit betekent dat naast de organismen chemische en fysische kenmerken ontsloten worden. Onder chemische kenmerken worden alle chemische stoffen en samenstellingen gerekend, bijvoorbeeld chloor, zware metalen, (gewassen-)bestrijdingsmiddelen en medicijnen. Onder fysische kenmerken vallen bijvoorbeeld troebelheid, diepte, stroming, zuurgraad, temperatuur, oeverbegroeiing, etc.
+Ecologische data kenmerkt zich een beperkte hoeveelheid data, vaak slechts &eacute;&eacute;n gemeten waarde, en uitvoerige meta-data om de meting te beschrijven.
 </p>
 
 <p>De DD-ECO-API is gesplitst in twee onderdelen: het measurements-deel voor het gericht opvragen van metingen, en het discovery-deel voor het uitgebreid doorzoeken van beschikbare ecologische data.<br/>
@@ -143,6 +134,12 @@ Voor beide delen zijn uit de RAML-specificaties HTML-pagina's gegenereerd:
 	</li>
 </ul>
 </p>
+
+<p>
+De RAML-specificaties van de DD-ECO-API zijn te vinden in master-branch van de <a href="https://github.com/DigitaleDeltaOrg/dd-eco-api-specs">dd-eco-api-specs repository</a> op GitHub:<br/>
+<a href="https://github.com/DigitaleDeltaOrg/dd-eco-api-specs">https://github.com/DigitaleDeltaOrg/dd-eco-api-specs</a>
+</p>
+
 
 </body>
 
