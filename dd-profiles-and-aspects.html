@@ -1,0 +1,458 @@
+<!DOCTYPE HTML>
+<html>
+<font face="Verdana">
+
+<body lang=EN link=blue vlink=purple style='tab-interval:
+36.0pt'>
+
+<div class=WordSection1>
+
+      <h1>Vertical profile and aspect specifications</h1>
+
+
+      <h3 id="about"><a href="#about">Vertical Profile Specification</a></h3>
+      <p>
+        The existing Point type geometry description is extende with a MultiPoint type.
+        This enables the definition of vertically located points and may be applied define sensors, located vertically at the same location.
+        The reference plane is also included, with the possible values ​​"NAP" (fixed sensors) and "WaterSurface" (sensor column moves with water surface) - see figure below.
+      </p>
+
+      <img src="sensor_img.png" alt="sensors" width="850" height="400">
+
+      <p>An example of the json response for such a MultiPoint location:</p>
+
+      <pre><code>
+      {
+      	"type": "Feature",
+      	"geometry": {
+      		"type": "MultiPoint",
+      		"coordinates": [
+      			[
+      				4.123456,
+      				52.123456,
+      				0.6
+      			],
+      			[
+      				4.123456,
+      				52.123456,
+      				-0.4
+      			],
+      			[
+      				4.123456,
+      				52.123456,
+      				-1.4
+      			]
+      		]
+      	},
+      	"properties": {
+      		"locationName": "Maarssen.West",
+      		"referenceLevel": "NAP"
+      		"crsName": "ETRS89"
+      }
+    </code></pre>
+
+    <h3 id="about"><a href="#about">Aspect Specification</a></h3>
+
+      <p>
+        The incoming measurements from a sensor are often processed into time series of associated values.
+        For example: a number of key figures are determined per above-mentioned interval:
+      </p>
+
+      <ul>
+        <li>average</li>
+        <li>minimum</li>
+        <li>maximum</li>
+        <li>standard deviation</li>
+        <li>other...</li>
+      </ul>
+
+      <p>
+        A mechanism is needed to deliver this data as related series.
+        Another example in which related data plays a role is the collection of key figures from wavefield measurements.
+        The values ​​for M0, Hm0, M0_M, Hm0_M, Tm02, Tm02_M, TE0, TE1, TE1_M, TE2, etc. are determined
+        per twenty minute interval.
+      </p>
+
+      <p>
+        These related data items are called Aspects, that can be bundled into AspectSets. An AspectSet contains a common combinations of the Aspects.
+        This way, ObservationTypes can be specified that do not describe just one quantity, but a collection of quantities:
+      </p>
+
+      <pre><code>
+      {
+        "id": "abcdefgh-ijkl-mnop-qrst-uvwxyz123456",
+      	"url": "https://some-url.nl/dd/v2/observationtypes/abcdefgh-ijkl-mnop-qrst-uvwxyz123456",<br>
+      	"quantity": "water_level",
+      	"description": "Water level data for average, minimum and maximum",
+      	"compartment": "OW",
+      	"aspectSet":
+        {
+      		"name": "AverMinMax",
+      		"aspects": [
+      			{
+      				"name": "gemiddelde",
+      				"unit": "m"
+      			},
+      			{
+      				"name": "minimum",
+      				"unit": "m"
+      			},
+      			{
+      				"name": "maximum",
+      				"unit": "m"
+      			}]
+      	}
+      }
+      </code></pre>
+
+    <h3>Event structure for data from aspects and/or multipoint locations</h3>
+
+    <p>When delivering the values ​​of multiple aspects at multiple points,
+      the values ​​in the events in the response are given as follows:</p>
+      <ul>
+        <li>First values are ordered per aspect</li>
+        <li>Within each aspect, values are ordered per point</li>
+      </ul>
+
+    <p>The sections below describe the four different situations.</p>
+
+    <h4>No aspectSet, no multiple points</h4>
+
+      <pre><code>
+{
+	"startTime": "2017-02-07T13:05:30Z",
+	"endTime": "2017-02-07T13:06:30Z",
+	"events": [
+		{
+			"timeStamp": "2017-02-07T13:05:30Z",
+			"value": 12
+		},
+		{
+			"timeStamp": "2017-02-07T13:06:30Z",
+			"value": 12.5
+		}
+	]
+}
+      </pre></code>
+
+    <h4>AspectSet, no multiple points</h4>
+
+      <pre><code>
+{
+	"startTime": "2017-02-07T13:05:30Z",
+	"endTime": "2017-02-07T13:06:30Z",
+	"events": [
+		{
+			"timeStamp": "2017-02-07T13:05:30Z",
+			"aspects": [
+				{
+					"name": "average",
+					"value": 10
+				},
+				{
+					"name": "minimum",
+					"value": 9
+				},
+				{
+					"name": "maximum",
+					"value": 11
+				}
+			]
+		},
+		{
+			"timeStamp": "2017-02-07T13:06:30Z",
+			"aspects": [
+				{
+					"name": "average",
+					"value": 10.5
+				},
+				{
+					"name": "minimum",
+					"value": 9.5
+				},
+				{
+					"name": "maximum",
+					"value": 11.5
+				}
+			]
+		}
+	]
+}
+      </pre></code>
+
+    <h4>Multiple points, no AspectSet</h4>
+
+      <pre><code>
+{
+	"startTime": "2017-02-07T13:05:30Z",
+	"endTime": "2017-02-07T13:06:30Z",
+	"events": [
+		{
+			"timeStamp": "2017-02-07T13:05:30Z",
+			"points": [
+				{
+					"coordinates": [
+						4.123456,
+						52.123456,
+						0.6
+					],
+					"value": 10
+				},
+				{
+					"coordinates": [
+						4.123456,
+						52.123456,
+						-0.4
+					],
+					"value": 11
+				},
+				{
+					"coordinates": [
+						4.123456,
+						52.123456,
+						-1.4
+					],
+					"value": 12
+				}
+			]
+		},
+		{
+			"timeStamp": "2017-02-07T13:06:30Z",
+			"points": [
+				{
+					"coordinates": [
+						4.123456,
+						52.123456,
+						0.6
+					],
+					"value": 10.5
+				},
+				{
+					"coordinates": [
+						4.123456,
+						52.123456,
+						-0.4
+					],
+					"value": 11.5
+				},
+				{
+					"coordinates": [
+						4.123456,
+						52.123456,
+						-1.4
+					],
+					"value": 12.5
+				}
+			]
+		}
+	]
+}
+</pre></code>
+
+    <h4>AspectSet and multiple points</h4>
+
+      <pre><code>
+{
+	"startTime": "2017-02-07T13:05:30Z",
+	"endTime": "2017-02-07T13:06:30Z",
+	"events": [
+		{
+			"timeStamp": "2017-02-07T13:05:30Z",
+			"aspects": [
+				{
+					"name": "average",
+					"points": [
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								0.6
+							],
+							"value": 10
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-0.4
+							],
+							"value": 11
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-1.4
+							],
+							"value": 12
+						}
+					]
+				},
+				{
+					"name": "minimum",
+					"points": [
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								0.6
+							],
+							"quality": 1,
+							"value": 9
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-0.4
+							],
+							"quality": 1,
+							"value": 10
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-1.4
+							],
+							"value": 11
+						}
+					]
+				},
+				{
+					"name": "maximum",
+					"points": [
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								0.6
+							],
+							"quality": 1,
+							"value": 11
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-0.4
+							],
+							"quality": 1,
+							"value": 12
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-1.4
+							],
+							"quality": 1,
+							"value": 13
+						}
+					]
+				}
+			]
+		},
+		{
+			"timeStamp": "2017-02-07T13:06:30Z",
+			"aspects": [
+				{
+					"name": "average",
+					"points": [
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								0.6
+							],
+							"value": 10.5
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-0.4
+							],
+							"value": 11.5
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-1.4
+							],
+							"value": 12.5
+						}
+					]
+				},
+				{
+					"name": "minimum",
+					"points": [
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								0.6
+							],
+							"quality": 1,
+							"value": 9.5
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-0.4
+							],
+							"quality": 1,
+							"value": 10.5
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-1.4
+							],
+							"value": 11.5
+						}
+					]
+				},
+				{
+					"name": "maximum",
+					"points": [
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								0.6
+							],
+							"quality": 1,
+							"value": 11.5
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-0.4
+							],
+							"quality": 1,
+							"value": 12.5
+						},
+						{
+							"coordinates": [
+								4.123456,
+								52.123456,
+								-1.4
+							],
+							"quality": 1,
+							"value": 13.5
+						}
+					]
+				}
+			]
+		}
+	]
+}
+      </pre></code>
+
+
+    </body>
