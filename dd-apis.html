@@ -71,37 +71,8 @@ Opmerking: de specificaties van DD-API 2.0 zijn compleet en afgerond. De documen
 
 <h3>Gerelateerde API's</h3>
 
-<p>Naast bovengenoemde DD-API zijn de volgende API's beschikbaar:
-<ul>
-	<li>
-	<b><em>DD-API 1.0</em></b><br/>
-	Dit is de eerste versie van de DD-API, gerichtop het zoeken, vinden en opvragen van tijdreeksen voor zowel waterkwantiteitsdata als waterkwaliteitsdata
-	</li>
-	<li>
-	<b><em>DD-OPER</em></b><br/>
-	Deze API is qua response gelijk aan de DD-API, maar is veel beperkter in de manier van bevragen, omdat hij gerichtis op OPERationele systemen.
-	</li>
-	<li>
-	<b><em>DD-ECO-API 1.0</em></b><br/>
-	Deze variant richt zich op het zoeken en opvragen van ecologische data.
-	</li>
-</ul>
-</p>
-
 <p>
-In de volgende paragrafen worden deze gerelateerde API's kort langsgelopen.<br/>
-</p>
-
-<h4>DD-API 1.0</h4>
-
-<p>
-Deze eerste versie van de DD-API is eind 2016 gespecificeerd, en begin 2017 door een aantal partijen ge&iuml;mplementeerd. Deze versie - zoals gezegd gericht op tijdseries - bevatte met enig kunst- en vliegwerk ook de ecologische data in dit tijdsreeksenformaat. Deze oplossing was echter verre van effici&euml;nt voor het doelgebied van ecologische informatie: door een te beperkte toegang tot de veelheid van meta-data bleken de ecologische gegevens onvoldoende doorzoekbaar. Bij de uitbreiding van 1.0 naar 2.0 is daarom besloten om de ecologische data apart te behandelen (zie 'DD-ECO-API' hieronder).
-</p>
-
-<p>
-De specificaties van DD-API-1.0 bevinden zich in de master-branch van de (ondertussen gearchiveerde want niet meer actieve) dd-api-spec repository op GitHub:<br/>
-<a href="https://github.com/DigitaleDeltaOrg/dd-api-spec/tree/master">https://github.com/DigitaleDeltaOrg/dd-api-spec/tree/master</a>.
-Uit de daarin aanwezige RAML-specificatie is een HTML-pagina gegenereerd met daarin de <a href="dd.v10.html">documentatie van DD-API 1.0</a>.
+Naast de DD-API kennen we een aantal gerelateerde API's. Deze worden hieronder kort beschreven.<br/>
 </p>
 
 <h4>DD-OPER</h4>
@@ -117,30 +88,23 @@ Deze html-documentatie is gegenereerd uit de formele RAML-specificaties. Deze zi
 <a href="https://github.com/DigitaleDeltaOrg/dd-api">https://github.com/DigitaleDeltaOrg/dd-api</a>
 </p>
 
-<h3>DD-ECO-API 1.0, voor ecologische data</h3>
+<h3>DD-ECO-API 2.0, voor ecologische data</h3>
 
 <p>
 Ecologische data betreft metingen die betrekking hebben op organismen en op de wisselwerking tussen organismen: levensgemeenschappen in en rond het water. Dit betekent dat naast de organismen chemische en fysische kenmerken ontsloten worden. Onder chemische kenmerken worden alle chemische stoffen en samenstellingen gerekend, bijvoorbeeld chloor, zware metalen, (gewassen-)bestrijdingsmiddelen en medicijnen. Onder fysische kenmerken vallen bijvoorbeeld troebelheid, diepte, stroming, zuurgraad, temperatuur, oeverbegroeiing, etc.
 Ecologische data kenmerkt zich een beperkte hoeveelheid data, vaak slechts &eacute;&eacute;n gemeten waarde, en uitvoerige meta-data om de meting te beschrijven.
 </p>
 
-<p>De DD-ECO-API is gesplitst in twee onderdelen: het measurements-deel voor het gericht opvragen van metingen, en het discovery-deel voor het uitgebreid doorzoeken van beschikbare ecologische data.<br/>
-Voor beide delen zijn uit de RAML-specificaties HTML-pagina's gegenereerd:
-<ul>
-	<li>
-	de <a href="DigitalDeltaEcoMeasurements.html">documentatie van DD-ECO-API <em>Measurements</em></a>;
-	</li>
-	<li>
-	de <a href="DigitalDeltaEcoDiscovery.html">documentatie van DD-ECO-API <em>Discovery</em></a>;
-	</li>
-</ul>
+<p>
+Een nadere beschrijving en de specificatie van de DD-ECO-API zijn te vinden in de <a href="https://digitaledeltaorg.github.io/dd-eco-api/">github pagina's van de DD-ECO-API</a>.
 </p>
+
+<h4>DD-GRID-API</h4>
 
 <p>
-De RAML-specificaties van de DD-ECO-API zijn te vinden in master-branch van de <a href="https://github.com/DigitaleDeltaOrg/dd-eco-api-specs">dd-eco-api-specs repository</a> op GitHub:<br/>
-<a href="https://github.com/DigitaleDeltaOrg/dd-eco-api-specs">https://github.com/DigitaleDeltaOrg/dd-eco-api-specs</a>
+Deze API is bedoeld voor het zoeken, vinden en opvragen van waterbeheergegevens die op roosters (grids) liggen.</br>
+Een nadere beschrijving en de specificatie zijn te vinden in de <a href="https://digitaledeltaorg.github.io/dd-grid-api/">github pagina's van de DD-GRID-API</a>
 </p>
-
 
 </body>
 
