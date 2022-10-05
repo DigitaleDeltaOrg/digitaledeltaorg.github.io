@@ -1,0 +1,833 @@
+<!DOCTYPE HTML><html><head><title>Digital Delta API API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 6.4.1"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h1 {
+        font-size: 1.3em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+      pre code {
+        overflow: auto;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      .items {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+      }
+      .examples {
+        margin-left: 0.5em;
+      }
+      .resource-modal li > ul {
+        margin-bottom: 1em;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Digital Delta API API documentation <small>version 1.0</small></h1><p>http://digitaldeltatest.aquadesk.nl</p><p>Digital Delta API</p><h3 id="introduction"><a href="#introduction">Introduction</a></h3><p>The Digital Delta is a distributed network in which various datasources exchange information using a standard interface. This specification outlines the mechanics of the Digital Delta as a distributed network of nodes and masternodes and describes the technical specification of the Digital Delta web API.<br>This document uses the <a href="http://raml.org">RAML standard</a> as the definition language.<br></p><h3 id="the_api_specification"><a href="#the_api_specification">The API specification</a></h3><p>The API specification consists of two parts.<ol><li>The Types section describes the data types that are available for the resources. Please refer to figure 1 below for the resource object diagram.<br><i>Note&colon; Currently, the generated HTML documentation does not contain tables that describe the data types. However, their content can be seen in the response tabs of the requests. If you want to have a detailed look at the type definitions, open the RAML file and go to the “# Base types.” section.</i></li><li>The Resources section describes the available end-points.</li></ol></p><p><i>Figure 1</i></p><img src="https://github.com/DigitaleDeltaOrg/dd-api-spec/blob/master/DD-API-ResourceObjects.jpg?raw=true"><p>The Digital Delta uses uuids (universally unique identifier, version 4) for identification of resource objects.<br>The use of uuids guarantees a unique identifier for an instance over all nodes in the Digital Delta without the need for individual nodes to have a knowledge about data in other nodes.<br>There is a code attribute as well that can be used by suppliers for their internal identifiers.<br>The Digital Delta supports timeseries data, defined as a measurement series with a begin and end time, a fixed location and a parameter.<br>The list of objects is setup to be extendable to other data types, such as raster or vector data.<br>The protocols provides by the services are HTTP and HTTPS. Currently authentication is Anonymous.<br>The Digital Delta only supports JSON as the output format and for POST request bodies.</p><h3 id="the_raml_standard_and_universal_unique_identifiers"><a href="#the_raml_standard_and_universal_unique_identifiers">The RAML standard and Universal unique identifiers</a></h3><p>The <a href="http://raml.org">RAML specification</a> currently doesn&#39;t know the type uuid (Universal unique identifiers). To have a structure in the definition to allow working with uuids, the Digital Delta specification uses a strong with a specific regular expression pattern. The base pattern is&colon; [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}.</p><h3 id="about_the_examples_in_this_document"><a href="#about_the_examples_in_this_document">About the examples in this document</a></h3><p>The examples in the requests are based on based on the AquaDesk implementation of the Digital Delta specifications. The structure, however, for all gets, posts and responses will be the same for all providers.</p><h3 id="future_enhancements"><a href="#future_enhancements">Future enhancements</a></h3><p>The following future enhancements are under consideration.<ul><li>Search endpoint (full-text search)</li><li>Authentication/Authorisation</li><li>Error and warning codes</li><li>OPTION request, explaining how the service works</li></ul></p><h3 id="future_research"><a href="#future_research">Future research</a></h3><p>The following topics are considered Future research<ul><li>Attributes for different standards</li><li>Support for multiple data types</li><li>Additional output formats</li><li>Basic calculations on timeseries data</li></ul></p><h3 id="document_history"><a href="#document_history">Document history</a></h3><table><tr><th width="100">Date</th><th width="100">Author</th><th>Changes</th><th></th></tr><tr><td>2017-05-06</td><td>Geri Wolters</td><td><ul><li>Texts from the original document added. Texts corrected and updated.</li><li>Introduction of samples.</li><li>Changed properties previous and next to return string? instead of string.</li><li>Changed properties events from timeseries to return an array or nil, as the values can be null.</li></ul></td></tr><tr><td>2017-05-30</td><td>Geri Wolters</td><td><ul><li>Added resource object diagram.</li></ul></td></tr><tr><td>2017-06-13</td><td>Geri Wolters</td><td><ul><li>Unified naming of fields and parameters.</li><li>TimeSeries field &#39;code&#39; is replaced by &#39;qualifier&#39;. &#39;qualifier&#39; is optional and filterable.</li><li>HTTP Status code 204 (NoContent) is introduced for list-requests. This value should be returned instead of an empty list.</li></ul></td></tr><tr><td>2017-06-26</td><td>Geri Wolters</td><td><ul><li>Changed error responses from 404 to 400.</li></ul></td></tr><tr><td>2017-12-14</td><td>Geri Wolters</td><td><ul><li>Changed Extras to required:false.</li><li>Fixed small bugs.</li></ul></td></tr></table></div><div class="panel panel-default"><div class="panel-heading"><h3 id="datasources" class="panel-title">/datasources</h3></div><div class="panel-body"><div class="top-resource-description"><p>The Datasources endpoint can return the datasources that the provider offers. Filtering&colon; uuid and name.</p><h3>About Datasource</h3><p>DataSource (“bronhouder” in Dutch) objects describe the source of the data. A node can have multiple data sources.</p><p></p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_datasources"><span class="parent"></span>/datasources</a> <span class="methods"><a href="#datasources_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_datasources" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#datasources_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="datasources_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/datasources</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#datasources_get_request" data-toggle="tab">Request</a></li><li><a href="#datasources_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="datasources_get_request"><h3>Query Parameters</h3><ul><li><strong>name</strong>: <em>(string)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>AquaDesk DD Primary</code></pre></div></li><li><strong>page</strong>: <em>(integer - minimum: 1)</em><p>Page number.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>pageSize</strong>: <em>(integer - minimum: 1 - maximum: 10000)</em><p>Page size.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>10</code></pre></div></li></ul></div><div class="tab-pane" id="datasources_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>results</strong>: <em>required (array of DataSource)</em><p>List of Datasource.</p><p><strong>Items</strong>: DataSource</p><div class="items"><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the datasource. UUID Version 4<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the datasource..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the datasource.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></div></li><li><strong>count</strong>: <em>required (integer)</em><p>Number of records satisfying the query parameters.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1123</code></pre></div></li><li><strong>previous</strong>: <em>required (string?)</em><p>Url to the API holding the previous page. null if the requested page is the first page.</p></li><li><strong>next</strong>: <em>required (string?)</em><p>Url to the API holding the next page. null if the requested page is the last page.</p></li><li><strong>maxPageSize</strong>: <em>required (integer)</em><p>Maximum page size, as allowed by the service.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "previous": null,
+  "next": null,
+  "maxPageSize": 100000,
+  "results": [
+    {
+      "uuid": "978fdf5c-95c8-43a5-82ff-d27d9e6d685f",
+      "name": "AquaDesk DD Primary",
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      }
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_datasources__uuid_"><span class="parent">/datasources</span>/{uuid}</a> <span class="methods"><a href="#datasources__uuid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_datasources__uuid_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Request a specific datasource by its uuid.</p></div><div class="list-group"><div onclick="window.location.href = '#datasources__uuid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="datasources__uuid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/datasources</span>/{uuid}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#datasources__uuid__get_request" data-toggle="tab">Request</a></li><li><a href="#datasources__uuid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="datasources__uuid__get_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>Unique identifier for the datasource. Version 4.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li></ul></div><div class="tab-pane" id="datasources__uuid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the datasource. UUID Version 4<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the datasource..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the datasource.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "uuid": "978fdf5c-95c8-43a5-82ff-d27d9e6d685f",
+  "name": "AquaDesk DD Primary",
+  "node": {
+    "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+    "name": "AquaDesk Primary",
+    "description": "AquaDesk Primary Node",
+    "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+  }
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "message": "Invalid data source"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="nodes" class="panel-title">/nodes</h3></div><div class="panel-body"><div class="top-resource-description"><p>The Nodes endpoint can return the nodes that the provider offers. Filtering&colon; uuid and name.</p><h3>About Node</h3><p>Node objects contain the properties of the data node. A node is an operational implementation of the Digital Delta specification.</p><p></p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_nodes"><span class="parent"></span>/nodes</a> <span class="methods"><a href="#nodes_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_nodes" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#nodes_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="nodes_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/nodes</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#nodes_get_request" data-toggle="tab">Request</a></li><li><a href="#nodes_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="nodes_get_request"><h3>Query Parameters</h3><ul><li><strong>name</strong>: <em>(string)</em><p>The (partial) name of the node.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>AquaDeskPrimaryNode</code></pre></div></li><li><strong>page</strong>: <em>(integer - minimum: 1)</em><p>Page number.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>pageSize</strong>: <em>(integer - minimum: 1 - maximum: 10000)</em><p>Page size.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>10</code></pre></div></li></ul></div><div class="tab-pane" id="nodes_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>results</strong>: <em>required (array of Node)</em><p>List of Nodes.</p><p><strong>Items</strong>: Node</p><div class="items"><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></div></li><li><strong>count</strong>: <em>required (integer)</em><p>Number of records satisfying the query parameters.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1123</code></pre></div></li><li><strong>previous</strong>: <em>required (string?)</em><p>Url to the API holding the previous page. null if the requested page is the first page.</p></li><li><strong>next</strong>: <em>required (string?)</em><p>Url to the API holding the next page. null if the requested page is the last page.</p></li><li><strong>maxPageSize</strong>: <em>required (integer)</em><p>Maximum page size, as allowed by the service.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 1,
+  "previous": null,
+  "next": null,
+  "maxPageSize": 100000,
+  "results": [
+    {
+      "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+      "name": "AquaDeskPrimaryNode",
+      "description": "Primary node for the AquaDesk RWS service.",
+      "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_nodes__uuid_"><span class="parent">/nodes</span>/{uuid}</a> <span class="methods"><a href="#nodes__uuid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_nodes__uuid_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Request a specific node by its uuid.</p></div><div class="list-group"><div onclick="window.location.href = '#nodes__uuid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="nodes__uuid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/nodes</span>/{uuid}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#nodes__uuid__get_request" data-toggle="tab">Request</a></li><li><a href="#nodes__uuid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="nodes__uuid__get_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (string)</em><p>Unique identifier for the node. Version 4.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>f4af47f5-f087-494c-9b2d-ba129bddd545</code></pre></div></li></ul></div><div class="tab-pane" id="nodes__uuid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+  "name": "AquaDeskPrimaryNode",
+  "description": "Primary node for the AquaDesk RWS service.",
+  "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "message": "Invalid node source"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="observationtypes" class="panel-title">/observationtypes</h3></div><div class="panel-body"><div class="top-resource-description"><p>The ObservationTypes endpoint can return the observationtypes that the provider offers. Filtering&colon; list of parameters.</p><h3>About ObservationType</h3><p>The ObservationType objects describe all attributes to correctly interpret what has been measured, and in what way. It is essential to have the quantity field.</p><p></p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_observationtypes"><span class="parent"></span>/observationtypes</a> <span class="methods"><a href="#observationtypes_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_observationtypes" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#observationtypes_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="observationtypes_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/observationtypes</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#observationtypes_get_request" data-toggle="tab">Request</a></li><li><a href="#observationtypes_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="observationtypes_get_request"><h3>Query Parameters</h3><ul><li><strong>quantity</strong>: <em>(string)</em><p>Retrieve only observation types that contain the specified quantity.</p></li><li><strong>parameterCode</strong>: <em>(string)</em><p>Retrieve only observation types that contain the specified parameter code.</p></li><li><strong>page</strong>: <em>(integer - minimum: 1)</em><p>Page number.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>pageSize</strong>: <em>(integer - minimum: 1 - maximum: 10000)</em><p>Page size.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>10</code></pre></div></li></ul></div><div class="tab-pane" id="observationtypes_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>results</strong>: <em>required (array of ObservationType)</em><p>List of observation types.</p><p><strong>Items</strong>: ObservationType</p><div class="items"><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the observationtype. UUID Version 4.</p></li><li><strong>quantity</strong>: <em>required (string)</em><p>Defines what was measured.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>ZICHT</code></pre><pre><code>MONSTER</code></pre><pre><code>CONCTTE</code></pre><pre><code>AANTL</code></pre></div></li><li><strong>unit</strong>: <em>required (string)</em><p>Unit of measurement. Follows the Aquo standards.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>cm2</code></pre><pre><code>n</code></pre><pre><code>n/m3</code></pre><pre><code>%</code></pre><pre><code>DIMSLS</code></pre><pre><code>C</code></pre></div></li><li><strong>parameterCode</strong>: <em>(string)</em><p>Parameter code specifying the observationtype. Non-biological observation types follow the Aquo standards.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>Pediastrum</code></pre><pre><code>Ca</code></pre><pre><code>1112T4ClC2a</code></pre><pre><code>HYBDVS</code></pre></div></li><li><strong>compartment</strong>: <em>(string)</em><p>The compartment in which the measurement took place. Standardised Aquo compartments.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>OW</code></pre><pre><code>DL</code></pre><pre><code>GW</code></pre><pre><code>LW</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>Dutch&colon; &#39;Hoedanigheid&#39;. Additional qualities of the measurement.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>AD</code></pre><pre><code>JU</code></pre><pre><code>T20C</code></pre><pre><code>KO</code></pre><pre><code>BraunBS</code></pre><pre><code>WATSGL</code></pre><pre><code>WATKLM</code></pre></div></li><li><strong>extra</strong>: <em>(array of KeyValuePair)</em><p>Extra information about the measurement. Can be used to provide specific details concerning the circumstances or the object measured, etc.</p><p><strong>Items</strong>: KeyValuePair</p><div class="items"><ul><li><strong>key</strong>: <em>required (string)</em><p>The key of the key/value pair.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>taxontype</code></pre></div></li><li><strong>value</strong>: <em>required (string)</em><p>The value of the key/value pair.</p></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "key": "taxongroup",
+    "value": "DIATM"
+  },
+  {
+    "key": "type",
+    "value": "Biotaxon"
+  }
+]</code></pre></div></li></ul></div></li><li><strong>count</strong>: <em>required (integer)</em><p>Number of records satisfying the query parameters.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1123</code></pre></div></li><li><strong>previous</strong>: <em>required (string?)</em><p>Url to the API holding the previous page. null if the requested page is the first page.</p></li><li><strong>next</strong>: <em>required (string?)</em><p>Url to the API holding the next page. null if the requested page is the last page.</p></li><li><strong>maxPageSize</strong>: <em>required (integer)</em><p>Maximum page size, as allowed by the service.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 674,
+  "previous": null,
+  "next": "https://digitaldeltatest.aquadesk.nl/observationtypes?page=2&amp;pagesize=2",
+  "maxPageSize": 100000,
+  "results": [
+    {
+      "uuid": "1f9f13c0-d45a-4031-9231-09235d81481e",
+      "quantity": "AANTL",
+      "unit": "n/ml",
+      "parameterCode": "Acanthoceras zachariasii",
+      "compartment": "OW",
+      "qualifier": "CE",
+      "extra": [
+        {
+          "key": "taxongroup",
+          "value": "DIATM"
+        },
+        {
+          "key": "type",
+          "value": "Biotaxon"
+        }
+      ]
+    },
+    {
+      "uuid": "75c234ef-8182-4948-a593-3c0b4c1a8308",
+      "quantity": "AANTL",
+      "unit": "n/ml",
+      "parameterCode": "Achnanthales",
+      "compartment": "OW",
+      "qualifier": "CE",
+      "extra": [
+        {
+          "key": "taxongroup",
+          "value": "DIATM"
+        },
+        {
+          "key": "type",
+          "value": "Biotaxon"
+        }
+      ]
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_observationtypes__qualifier_"><span class="parent">/observationtypes</span>/{qualifier}</a> <span class="methods"><a href="#observationtypes__qualifier__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_observationtypes__qualifier_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Request a specific observation type by its qualifier.<br><b><i>Since almost no specific ObservationTypes for biological entities exist in Aquo, AquaDesk is using uuids instead of the code. The type &#39;String&#39; is used in both circumstances.</i></b></p></div><div class="list-group"><div onclick="window.location.href = '#observationtypes__qualifier__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="observationtypes__qualifier__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/observationtypes</span>/{qualifier}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#observationtypes__qualifier__get_request" data-toggle="tab">Request</a></li><li><a href="#observationtypes__qualifier__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="observationtypes__qualifier__get_request"><h3>URI Parameters</h3><ul><li><strong>qualifier</strong>: <em>required (string)</em><p>The qualifier (or uuid for AquaDesk) identifying the observation type.</p></li></ul></div><div class="tab-pane" id="observationtypes__qualifier__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the observationtype. UUID Version 4.</p></li><li><strong>quantity</strong>: <em>required (string)</em><p>Defines what was measured.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>ZICHT</code></pre><pre><code>MONSTER</code></pre><pre><code>CONCTTE</code></pre><pre><code>AANTL</code></pre></div></li><li><strong>unit</strong>: <em>required (string)</em><p>Unit of measurement. Follows the Aquo standards.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>cm2</code></pre><pre><code>n</code></pre><pre><code>n/m3</code></pre><pre><code>%</code></pre><pre><code>DIMSLS</code></pre><pre><code>C</code></pre></div></li><li><strong>parameterCode</strong>: <em>(string)</em><p>Parameter code specifying the observationtype. Non-biological observation types follow the Aquo standards.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>Pediastrum</code></pre><pre><code>Ca</code></pre><pre><code>1112T4ClC2a</code></pre><pre><code>HYBDVS</code></pre></div></li><li><strong>compartment</strong>: <em>(string)</em><p>The compartment in which the measurement took place. Standardised Aquo compartments.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>OW</code></pre><pre><code>DL</code></pre><pre><code>GW</code></pre><pre><code>LW</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>Dutch&colon; &#39;Hoedanigheid&#39;. Additional qualities of the measurement.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>AD</code></pre><pre><code>JU</code></pre><pre><code>T20C</code></pre><pre><code>KO</code></pre><pre><code>BraunBS</code></pre><pre><code>WATSGL</code></pre><pre><code>WATKLM</code></pre></div></li><li><strong>extra</strong>: <em>(array of KeyValuePair)</em><p>Extra information about the measurement. Can be used to provide specific details concerning the circumstances or the object measured, etc.</p><p><strong>Items</strong>: KeyValuePair</p><div class="items"><ul><li><strong>key</strong>: <em>required (string)</em><p>The key of the key/value pair.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>taxontype</code></pre></div></li><li><strong>value</strong>: <em>required (string)</em><p>The value of the key/value pair.</p></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "key": "taxongroup",
+    "value": "DIATM"
+  },
+  {
+    "key": "type",
+    "value": "Biotaxon"
+  }
+]</code></pre></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "uuid": "1f9f13c0-d45a-4031-9231-09235d81481e",
+  "quantity": "AANTL",
+  "unit": "n/ml",
+  "parameterCode": "Acanthoceras zachariasii",
+  "compartment": "OW",
+  "qualifier": "CE",
+  "extra": [
+    {
+      "key": "taxongroup",
+      "value": "DIATM"
+    },
+    {
+      "key": "type",
+      "value": "Biotaxon"
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "message": "Invalid observation type source"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="locations" class="panel-title">/locations</h3></div><div class="panel-body"><div class="top-resource-description"><p>The Locations endpoint can return the locations that the provider offers. Filtering&colon; bounding box, uuid, code, name and node.</p><h3>About Locations</h3><p>A location object contains all information required to describe a location. This version contains a node.</p><p></p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_locations"><span class="parent"></span>/locations</a> <span class="methods"><a href="#locations_get"><span class="badge badge_get">get</span></a> <a href="#locations_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_locations" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#locations_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div><div onclick="window.location.href = '#locations_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="locations_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/locations</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#locations_get_request" data-toggle="tab">Request</a></li><li><a href="#locations_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="locations_get_request"><h3>Query Parameters</h3><ul><li><strong>boundingBox</strong>: <em>(string)</em><p>Bounding box representing a rectangle in which the locations must lie. This is represented by 4 doubles, separated by commas.<br>Example&colon; boundingBox=minLon,minLat,maxLon,maxLat<br>Where&colon;<br><b>minLon&colon;</b> minimum longitude in decimal degrees (WGS84)<br><b>minLat&colon;</b> minimum lattitude in decimal degrees (WGS84)<br><b>maxLon&colon;</b> maximum longitude in decimal degrees (WGS84)<br><b>maxLat&colon;</b> maximum lattitude in decimal degrees (WGS84)<br></p><p><strong>Example</strong>:</p><div class="examples"><pre><code>4.8,52.0,5.8,54.0</code></pre></div></li><li><strong>name</strong>: <em>(string)</em><p>(Partial) location name.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>NEDHMT</code></pre></div></li><li><strong>node</strong>: <em>(string)</em><p>Uuid of the node.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>f4af47f5-f087-494c-9b2d-ba129bddd545</code></pre></div></li><li><strong>code</strong>: <em>(string)</em><p>Location code.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>NLWATB-RWTS_AFGDM_0001</code></pre></div></li><li><strong>page</strong>: <em>(integer - minimum: 1)</em><p>Page number.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>pageSize</strong>: <em>(integer - minimum: 1 - maximum: 10000)</em><p>Page size.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>10</code></pre></div></li></ul></div><div class="tab-pane" id="locations_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>results</strong>: <em>required (array of Location)</em><p>List of Locations.</p><p><strong>Items</strong>: Location</p><div class="items"><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the location. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>url</strong>: <em>required (string)</em><p>The URL of the location.</p></li><li><strong>code</strong>: <em>required (string)</em><p>The code of the location.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the location..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>geometry</strong>: <em>required (object)</em><p>The GeoJSON geometry definition of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>type</strong>: <em>required (string)</em><p>The geometry type. Must have the value "Point".</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Point</code></pre></div></li><li><strong>coordinates</strong>: <em>required (array of Double)</em><p>An array of doubles, representing a coordinate.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  4.234,
+  52.3423
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></div></li><li><strong>count</strong>: <em>required (integer)</em><p>Number of records satisfying the query parameters.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1123</code></pre></div></li><li><strong>previous</strong>: <em>required (string?)</em><p>Url to the API holding the previous page. null if the requested page is the first page.</p></li><li><strong>next</strong>: <em>required (string?)</em><p>Url to the API holding the next page. null if the requested page is the last page.</p></li><li><strong>maxPageSize</strong>: <em>required (integer)</em><p>Maximum page size, as allowed by the service.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 795,
+  "previous": null,
+  "next": "https://digitaldeltatest.aquadesk.nl/locations?page=2&amp;pagesize=10",
+  "maxPageSize": 100000,
+  "results": [
+    {
+      "uuid": "ed0655e7-ced5-42ad-ac42-b9b96639307c",
+      "url": "https://digitaldeltatest.aquadesk.nl/locations/ed0655e7-ced5-42ad-ac42-b9b96639307c",
+      "code": "NLWATB-RWTS_AFGDM_0001",
+      "name": "NEDHMT",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.15835627200311,
+          51.7581204207227,
+          0
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      }
+    },
+    {
+      "uuid": "4d58d630-ac4e-4eb3-bff4-1b17c7b77630",
+      "url": "https://digitaldeltatest.aquadesk.nl/locations/4d58d630-ac4e-4eb3-bff4-1b17c7b77630",
+      "code": "NLWATB-RWTS_AFGDM_0002",
+      "name": "VEEN",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.11187400090377,
+          51.7800422641779,
+          0
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      }
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="locations_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/locations</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#locations_post_request" data-toggle="tab">Request</a></li><li><a href="#locations_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="locations_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>code</strong>: <em>required (array of )</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "code": [
+    "NLWATB-RWTS_AFGDM_0001",
+    "NLWATB-RWTS_AFGDM_0002"
+  ]
+}</code></pre></div></div><div class="tab-pane" id="locations_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>results</strong>: <em>required (array of Location)</em><p>List of Locations.</p><p><strong>Items</strong>: Location</p><div class="items"><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the location. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>url</strong>: <em>required (string)</em><p>The URL of the location.</p></li><li><strong>code</strong>: <em>required (string)</em><p>The code of the location.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the location..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>geometry</strong>: <em>required (object)</em><p>The GeoJSON geometry definition of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>type</strong>: <em>required (string)</em><p>The geometry type. Must have the value "Point".</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Point</code></pre></div></li><li><strong>coordinates</strong>: <em>required (array of Double)</em><p>An array of doubles, representing a coordinate.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  4.234,
+  52.3423
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></div></li><li><strong>count</strong>: <em>required (integer)</em><p>Number of records satisfying the query parameters.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1123</code></pre></div></li><li><strong>previous</strong>: <em>required (string?)</em><p>Url to the API holding the previous page. null if the requested page is the first page.</p></li><li><strong>next</strong>: <em>required (string?)</em><p>Url to the API holding the next page. null if the requested page is the last page.</p></li><li><strong>maxPageSize</strong>: <em>required (integer)</em><p>Maximum page size, as allowed by the service.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 795,
+  "previous": null,
+  "next": "https://digitaldeltatest.aquadesk.nl/locations?page=2&amp;pageSize=10",
+  "maxPageSize": 100000,
+  "results": [
+    {
+      "uuid": "ed0655e7-ced5-42ad-ac42-b9b96639307c",
+      "url": "https://digitaldeltatest.aquadesk.nl/locations/ed0655e7-ced5-42ad-ac42-b9b96639307c",
+      "code": "NLWATB-RWTS_AFGDM_0001",
+      "name": "NEDHMT",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.15835627200311,
+          51.7581204207227,
+          0
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      }
+    },
+    {
+      "uuid": "4d58d630-ac4e-4eb3-bff4-1b17c7b77630",
+      "url": "https://digitaldeltatest.aquadesk.nl/locations/4d58d630-ac4e-4eb3-bff4-1b17c7b77630",
+      "code": "NLWATB-RWTS_AFGDM_0002",
+      "name": "VEEN",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.11187400090377,
+          51.7800422641779,
+          0
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      }
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{"message": "Invalid filters"}   
+ 
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_locations__uuid_"><span class="parent">/locations</span>/{uuid}</a> <span class="methods"><a href="#locations__uuid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_locations__uuid_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Request a specific location by its uuid.</p></div><div class="list-group"><div onclick="window.location.href = '#locations__uuid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="locations__uuid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/locations</span>/{uuid}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#locations__uuid__get_request" data-toggle="tab">Request</a></li><li><a href="#locations__uuid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="locations__uuid__get_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>Unique identifier for the location. Version 4.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>ed0655e7-ced5-42ad-ac42-b9b96639307c</code></pre></div></li></ul></div><div class="tab-pane" id="locations__uuid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the location. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>url</strong>: <em>required (string)</em><p>The URL of the location.</p></li><li><strong>code</strong>: <em>required (string)</em><p>The code of the location.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the location..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>geometry</strong>: <em>required (object)</em><p>The GeoJSON geometry definition of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>type</strong>: <em>required (string)</em><p>The geometry type. Must have the value "Point".</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Point</code></pre></div></li><li><strong>coordinates</strong>: <em>required (array of Double)</em><p>An array of doubles, representing a coordinate.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  4.234,
+  52.3423
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "uuid": "ed0655e7-ced5-42ad-ac42-b9b96639307c",
+  "url": "https://digitaldeltatest.aquadesk.nl/locations/ed0655e7-ced5-42ad-ac42-b9b96639307c",
+  "code": "NLWATB-RWTS_AFGDM_0001",
+  "name": "NEDHMT",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      5.15835627200311,
+      51.7581204207227,
+      0
+    ]
+  },
+  "node": {
+    "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+    "name": "AquaDesk Primary",
+    "description": "AquaDesk Primary Node",
+    "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+  }
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{"message": "Invalid location code"}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="timeseries" class="panel-title">/timeseries</h3></div><div class="panel-body"><div class="top-resource-description"><p>The timeseries endpoint can return both the metadata and the data itself. If a start&dash; and endtime is given in the request, the data is added to the response, for both the List and the Detail requests. Furthermore, it is possible to only retrieve the data (without the metadata) by querying the data endpoint&colon; /timeseries/{uuid}/data/.<br><i><b>Optional&colon; add start and end filter, returns metadata and data (values)</b></i><br>Filtering&colon; value type, uuid, code, node, timeseries type, observation type, location name, start- and enddate.<br></p><h3>About Timeseries</h3><p>Timeseries objects contain all information needed to interpret timeseries.<br>There are references to other objects, such as Node, Location, DataSource, ObservationType and TimeseriesType.<br>The TimeseriesType should be added as a reference because it can indicate if a timeseries containts a RAW dataset or makes use of the current measurements. The Digital Delta specification of timeseries makes no assumptions on the nature of the series, timeseries may describe any series of data points of the same observation type and datasource in time on one location.<br>This includes both equidistant series (fixed time interval between data points) and non-equidistant series (with varying time interval).</p><h3>Use case&colon;</h3><p>Imagine a data-source is providing several timeseries for a specific location and observation. For example&colon;<br>Waterlevel is measured every 5 minutes for the location Lobith. This is the original timeseries from the datasource and we can call it the RAW timeseries or the original timeseries.<br>Within the same data-souce, again, waterlevel is measured every 5 minutes for the same location, but this timeseries is a manually or automatically validated timeseries. So in this case we have an original timeseries which is providing the raw data and another timeseries which has been validated. Both timeseries can be required for different purposes.<br>Now imagine that someone requires the validated timeseries instead of the original.<br>The users should be able to filter them based on this information and retreve data only for this type of timeseries. There are several more uses cases where more than two types are used. Think of timeseries that are recalculated based on validation, interval, aggregation, etc.<br><br>Using TimeseriesType is providing more flexibility in providing multiple timeseries for the same location and observation type provided by a single data-source.</p><p></p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_timeseries"><span class="parent"></span>/timeseries</a> <span class="methods"><a href="#timeseries_get"><span class="badge badge_get">get</span></a> <a href="#timeseries_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_timeseries" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#timeseries_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div><div onclick="window.location.href = '#timeseries_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="timeseries_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/timeseries</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#timeseries_get_request" data-toggle="tab">Request</a></li><li><a href="#timeseries_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="timeseries_get_request"><h3>Query Parameters</h3><ul><li><strong>start</strong>: <em>(datetime)</em><p>Retrieve measurements that are measured on or after this date and time.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2015-01-01T00:00:00Z</code></pre></div></li><li><strong>end</strong>: <em>(datetime)</em><p>Retrieve measurements that are measured before or on this date and time. Uses the Zulu notation.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-12-31T23:59:59Z</code></pre></div></li><li><strong>locationCode</strong>: <em>(string)</em><p>Retrieve measurements that were measured at a location with a name like the location code.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>VEEN</code></pre></div></li><li><strong>observationType</strong>: <em>(string)</em><p>Unique identifier of the observation type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1f9f13c0-d45a-4031-9231-09235d81481e</code></pre></div></li><li><strong>timeseriesType</strong>: <em>(string)</em><p>Code of the time series. AquaDesk only supports MEAS.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>MEAS</code></pre></div></li><li><strong>node</strong>: <em>(string)</em><p>Unique identifier of the node.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>f4af47f5-f087-494c-9b2d-ba129bddd545</code></pre></div></li><li><strong>valueType</strong>: <em>(string)</em><p>Value type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>float</code></pre></div></li><li><strong>page</strong>: <em>(integer - minimum: 1)</em><p>Page number.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1</code></pre></div></li><li><strong>pageSize</strong>: <em>(integer - minimum: 1 - maximum: 10000)</em><p>Page size.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>10</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>Filter for the optional qualifier property.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>H.meting</code></pre></div></li></ul></div><div class="tab-pane" id="timeseries_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>results</strong>: <em>required (array of Timeseries)</em><p>List of timeseries types.</p><p><strong>Items</strong>: Timeseries</p><div class="items"><ul><li><strong>url</strong>: <em>required (string)</em></li><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the timeseries. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable<strike></strike></strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>f4af47f5-f087-494c-9b2d-ba129bddd545</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>The qualifier of the timeseries. AquaDesk uses the uuid for this.<br>Qualifiers&colon;<font color="gray"><strike>Nullable<strike></strike></strike></font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>H.Meting</code></pre></div></li><li><strong>location</strong>: <em>required (object)</em><p>The location that the timeseries uses.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the location. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>url</strong>: <em>required (string)</em><p>The URL of the location.</p></li><li><strong>code</strong>: <em>required (string)</em><p>The code of the location.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the location..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>geometry</strong>: <em>required (object)</em><p>The GeoJSON geometry definition of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>type</strong>: <em>required (string)</em><p>The geometry type. Must have the value "Point".</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Point</code></pre></div></li><li><strong>coordinates</strong>: <em>required (array of Double)</em><p>An array of doubles, representing a coordinate.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  4.234,
+  52.3423
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></li><li><strong>observationType</strong>: <em>required (object)</em><p>The observationtype that the timeseries uses.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the observationtype. UUID Version 4.</p></li><li><strong>quantity</strong>: <em>required (string)</em><p>Defines what was measured.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>ZICHT</code></pre><pre><code>MONSTER</code></pre><pre><code>CONCTTE</code></pre><pre><code>AANTL</code></pre></div></li><li><strong>unit</strong>: <em>required (string)</em><p>Unit of measurement. Follows the Aquo standards.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>cm2</code></pre><pre><code>n</code></pre><pre><code>n/m3</code></pre><pre><code>%</code></pre><pre><code>DIMSLS</code></pre><pre><code>C</code></pre></div></li><li><strong>parameterCode</strong>: <em>(string)</em><p>Parameter code specifying the observationtype. Non-biological observation types follow the Aquo standards.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>Pediastrum</code></pre><pre><code>Ca</code></pre><pre><code>1112T4ClC2a</code></pre><pre><code>HYBDVS</code></pre></div></li><li><strong>compartment</strong>: <em>(string)</em><p>The compartment in which the measurement took place. Standardised Aquo compartments.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>OW</code></pre><pre><code>DL</code></pre><pre><code>GW</code></pre><pre><code>LW</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>Dutch&colon; &#39;Hoedanigheid&#39;. Additional qualities of the measurement.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>AD</code></pre><pre><code>JU</code></pre><pre><code>T20C</code></pre><pre><code>KO</code></pre><pre><code>BraunBS</code></pre><pre><code>WATSGL</code></pre><pre><code>WATKLM</code></pre></div></li><li><strong>extra</strong>: <em>(array of KeyValuePair)</em><p>Extra information about the measurement. Can be used to provide specific details concerning the circumstances or the object measured, etc.</p><p><strong>Items</strong>: KeyValuePair</p><div class="items"><ul><li><strong>key</strong>: <em>required (string)</em><p>The key of the key/value pair.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>taxontype</code></pre></div></li><li><strong>value</strong>: <em>required (string)</em><p>The value of the key/value pair.</p></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "key": "taxongroup",
+    "value": "DIATM"
+  },
+  {
+    "key": "type",
+    "value": "Biotaxon"
+  }
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node responsible for hosting the data for the timeseries.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li><li><strong>datasource</strong>: <em>required (object)</em><p>The datasource providing the data for the timeseries..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the datasource. UUID Version 4<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the datasource..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the datasource.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></li><li><strong>timeseriesType</strong>: <em>required (object)</em><p>The type of the timeseries..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><ul><li><strong>code</strong>: <em>required (string)</em><p>The code of the timeseries type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>MEAS</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the timeseries type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Measurement</code></pre></div></li></ul></li><li><strong>interval</strong>: <em>(number)</em><p>Specifies the interval between measurements for the timeseries.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>valueType</strong>: <em>(string)</em><p>The data type of the measured data.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>start</strong>: <em>required (datetime)</em><p>Start date/time of the measurement. Uses the Zulu notation<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-01-01T12:45:00Z</code></pre></div></li><li><strong>end</strong>: <em>required (datetime)</em><p>End date/time of the measurement. Uses the Zulu notation<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-01-01T12:45:00Z</code></pre></div></li><li><strong>events</strong>: <em>(array of Event (minimal))</em><p>Defines a minimal event.</p><p><strong>Items</strong>: Event (minimal)</p><div class="items"><ul><li><strong>value</strong>: <em>required (number)</em><p>The value of the measured data.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>37</code></pre></div></li><li><strong>timeStamp</strong>: <em>(datetime)</em><p>The date/time when the measurement took place. Uses the Zulu notation.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-12-31T12:45:00Z</code></pre></div></li></ul></div></li></ul></div></li><li><strong>count</strong>: <em>required (integer)</em><p>Number of records satisfying the query parameters.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1123</code></pre></div></li><li><strong>previous</strong>: <em>required (string?)</em><p>Url to the API holding the previous page. null if the requested page is the first page.</p></li><li><strong>next</strong>: <em>required (string?)</em><p>Url to the API holding the next page. null if the requested page is the last page.</p></li><li><strong>maxPageSize</strong>: <em>required (integer)</em><p>Maximum page size, as allowed by the service.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 48751,
+  "previous": null,
+  "next": "https://digitaldeltatest.aquadesk.nl/timeseries?page=2&amp;pagesize=2",
+  "maxPageSize": 100000,
+  "results": [
+    {
+      "url": "https://digitaldeltatest.aquadesk.nl/timeseries/e9ede034-f254-4855-b1ea-fe715c382935",
+      "uuid": "e9ede034-f254-4855-b1ea-fe715c382935",
+      "location": {
+        "uuid": "6fba498f-0b59-462b-8c34-bd456d8e7d31",
+        "url": "https://digitaldeltatest.aquadesk.nl/locations/6fba498f-0b59-462b-8c34-bd456d8e7d31",
+        "code": "NLWATB-RWTS_BERMS_0002",
+        "name": "KEIZVR",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.89443671141974,
+            51.7201856231622,
+            0
+          ]
+        },
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "observationType": {
+        "uuid": "297d7ba6-d5e0-4683-849a-5246a3aa83c4",
+        "quantity": "AANTL",
+        "unit": "n/ml",
+        "parameterCode": "Achnanthidium",
+        "compartment": "OW",
+        "qualifier": "CE",
+        "extra": [
+          {
+            "key": "taxongroup",
+            "value": "DIATM"
+          },
+          {
+            "key": "type",
+            "value": "Biotaxon"
+          }
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      },
+      "datasource": {
+        "uuid": "978fdf5c-95c8-43a5-82ff-d27d9e6d685f",
+        "name": "AquaDesk Primary",
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "timeseriesType": {
+        "code": "MEAS",
+        "name": "Measurements"
+      },
+      "interval": null,
+      "valueType": "float",
+      "start": "2005-02-14T23:00:00Z",
+      "end": "2005-02-14T23:00:00Z",
+      "events": null
+    },
+    {
+      "url": "https://digitaldeltatest.aquadesk.nl/timeseries/db9544e4-1eb3-4f99-ac6e-b9c02a7cca88",
+      "uuid": "db9544e4-1eb3-4f99-ac6e-b9c02a7cca88",
+      "location": {
+        "uuid": "6fba498f-0b59-462b-8c34-bd456d8e7d31",
+        "url": "\\null\\",
+        "code": "NLWATB-RWTS_BERMS_0002",
+        "name": "KEIZVR",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.89443671141974,
+            51.7201856231622,
+            0
+          ]
+        },
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "observationType": {
+        "uuid": "5cd9726e-7985-4789-9674-22bec8bef325",
+        "quantity": "AANTL",
+        "unit": "n/ml",
+        "parameterCode": "Actinocyclus normanii",
+        "compartment": "OW",
+        "qualifier": "CE",
+        "extra": [
+          {
+            "key": "taxongroup",
+            "value": "DIATM"
+          },
+          {
+            "key": "type",
+            "value": "Biotaxon"
+          }
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      },
+      "datasource": {
+        "uuid": "978fdf5c-95c8-43a5-82ff-d27d9e6d685f",
+        "name": "AquaDesk Primary",
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "timeseriesType": {
+        "code": "MEAS",
+        "name": "Measurements"
+      },
+      "interval": null,
+      "valueType": "float",
+      "start": "2004-08-30T22:00:00Z",
+      "end": "2004-08-30T22:00:00Z",
+      "events": null
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{"message": "Invalid filters"}
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="timeseries_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/timeseries</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#timeseries_post_request" data-toggle="tab">Request</a></li><li><a href="#timeseries_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="timeseries_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>code</strong>: <em>required (array of )</em><p>Array of codes or uuids of timeseries to return. AquaDesk uses uuids.</p></li><li><strong>start</strong>: <em>required (date-only)</em><p>First date of the requested measurements. Format&colon; yyyy-MM-dd.</p></li><li><strong>end</strong>: <em>required (date-only)</em><p>Last date of the requested measurements. Format&colon; yyyy-MM-dd.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "code": [
+    "H.Meting"
+  ],
+  "start": "2012-01-01",
+  "end": "2013-01-01"
+}</code></pre></div></div><div class="tab-pane" id="timeseries_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>results</strong>: <em>required (array of Timeseries)</em><p>List of timeseries types.</p><p><strong>Items</strong>: Timeseries</p><div class="items"><ul><li><strong>url</strong>: <em>required (string)</em></li><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the timeseries. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable<strike></strike></strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>f4af47f5-f087-494c-9b2d-ba129bddd545</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>The qualifier of the timeseries. AquaDesk uses the uuid for this.<br>Qualifiers&colon;<font color="gray"><strike>Nullable<strike></strike></strike></font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>H.Meting</code></pre></div></li><li><strong>location</strong>: <em>required (object)</em><p>The location that the timeseries uses.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the location. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>url</strong>: <em>required (string)</em><p>The URL of the location.</p></li><li><strong>code</strong>: <em>required (string)</em><p>The code of the location.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the location..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>geometry</strong>: <em>required (object)</em><p>The GeoJSON geometry definition of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>type</strong>: <em>required (string)</em><p>The geometry type. Must have the value "Point".</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Point</code></pre></div></li><li><strong>coordinates</strong>: <em>required (array of Double)</em><p>An array of doubles, representing a coordinate.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  4.234,
+  52.3423
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></li><li><strong>observationType</strong>: <em>required (object)</em><p>The observationtype that the timeseries uses.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the observationtype. UUID Version 4.</p></li><li><strong>quantity</strong>: <em>required (string)</em><p>Defines what was measured.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>ZICHT</code></pre><pre><code>MONSTER</code></pre><pre><code>CONCTTE</code></pre><pre><code>AANTL</code></pre></div></li><li><strong>unit</strong>: <em>required (string)</em><p>Unit of measurement. Follows the Aquo standards.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>cm2</code></pre><pre><code>n</code></pre><pre><code>n/m3</code></pre><pre><code>%</code></pre><pre><code>DIMSLS</code></pre><pre><code>C</code></pre></div></li><li><strong>parameterCode</strong>: <em>(string)</em><p>Parameter code specifying the observationtype. Non-biological observation types follow the Aquo standards.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>Pediastrum</code></pre><pre><code>Ca</code></pre><pre><code>1112T4ClC2a</code></pre><pre><code>HYBDVS</code></pre></div></li><li><strong>compartment</strong>: <em>(string)</em><p>The compartment in which the measurement took place. Standardised Aquo compartments.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>OW</code></pre><pre><code>DL</code></pre><pre><code>GW</code></pre><pre><code>LW</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>Dutch&colon; &#39;Hoedanigheid&#39;. Additional qualities of the measurement.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>AD</code></pre><pre><code>JU</code></pre><pre><code>T20C</code></pre><pre><code>KO</code></pre><pre><code>BraunBS</code></pre><pre><code>WATSGL</code></pre><pre><code>WATKLM</code></pre></div></li><li><strong>extra</strong>: <em>(array of KeyValuePair)</em><p>Extra information about the measurement. Can be used to provide specific details concerning the circumstances or the object measured, etc.</p><p><strong>Items</strong>: KeyValuePair</p><div class="items"><ul><li><strong>key</strong>: <em>required (string)</em><p>The key of the key/value pair.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>taxontype</code></pre></div></li><li><strong>value</strong>: <em>required (string)</em><p>The value of the key/value pair.</p></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "key": "taxongroup",
+    "value": "DIATM"
+  },
+  {
+    "key": "type",
+    "value": "Biotaxon"
+  }
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node responsible for hosting the data for the timeseries.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li><li><strong>datasource</strong>: <em>required (object)</em><p>The datasource providing the data for the timeseries..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the datasource. UUID Version 4<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the datasource..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the datasource.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></li><li><strong>timeseriesType</strong>: <em>required (object)</em><p>The type of the timeseries..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><ul><li><strong>code</strong>: <em>required (string)</em><p>The code of the timeseries type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>MEAS</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the timeseries type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Measurement</code></pre></div></li></ul></li><li><strong>interval</strong>: <em>(number)</em><p>Specifies the interval between measurements for the timeseries.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>valueType</strong>: <em>(string)</em><p>The data type of the measured data.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>start</strong>: <em>required (datetime)</em><p>Start date/time of the measurement. Uses the Zulu notation<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-01-01T12:45:00Z</code></pre></div></li><li><strong>end</strong>: <em>required (datetime)</em><p>End date/time of the measurement. Uses the Zulu notation<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-01-01T12:45:00Z</code></pre></div></li><li><strong>events</strong>: <em>(array of Event (minimal))</em><p>Defines a minimal event.</p><p><strong>Items</strong>: Event (minimal)</p><div class="items"><ul><li><strong>value</strong>: <em>required (number)</em><p>The value of the measured data.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>37</code></pre></div></li><li><strong>timeStamp</strong>: <em>(datetime)</em><p>The date/time when the measurement took place. Uses the Zulu notation.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-12-31T12:45:00Z</code></pre></div></li></ul></div></li></ul></div></li><li><strong>count</strong>: <em>required (integer)</em><p>Number of records satisfying the query parameters.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>1123</code></pre></div></li><li><strong>previous</strong>: <em>required (string?)</em><p>Url to the API holding the previous page. null if the requested page is the first page.</p></li><li><strong>next</strong>: <em>required (string?)</em><p>Url to the API holding the next page. null if the requested page is the last page.</p></li><li><strong>maxPageSize</strong>: <em>required (integer)</em><p>Maximum page size, as allowed by the service.</p></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "count": 48751,
+  "previous": null,
+  "next": "https://digitaldeltatest.aquadesk.nl/timeseries?page=2&amp;pagesize=2",
+  "maxPageSize": 100000,
+  "results": [
+    {
+      "url": "https://digitaldeltatest.aquadesk.nl/timeseries/e9ede034-f254-4855-b1ea-fe715c382935",
+      "uuid": "e9ede034-f254-4855-b1ea-fe715c382935",
+      "location": {
+        "uuid": "6fba498f-0b59-462b-8c34-bd456d8e7d31",
+        "url": "https://digitaldeltatest.aquadesk.nl/locations/6fba498f-0b59-462b-8c34-bd456d8e7d31",
+        "code": "NLWATB-RWTS_BERMS_0002",
+        "name": "KEIZVR",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.89443671141974,
+            51.7201856231622,
+            0
+          ]
+        },
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "observationType": {
+        "uuid": "297d7ba6-d5e0-4683-849a-5246a3aa83c4",
+        "quantity": "AANTL",
+        "unit": "n/ml",
+        "parameterCode": "Achnanthidium",
+        "compartment": "OW",
+        "qualifier": "CE",
+        "extra": [
+          {
+            "key": "taxongroup",
+            "value": "DIATM"
+          },
+          {
+            "key": "type",
+            "value": "Biotaxon"
+          }
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      },
+      "datasource": {
+        "uuid": "978fdf5c-95c8-43a5-82ff-d27d9e6d685f",
+        "name": "AquaDesk Primary",
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "timeseriesType": {
+        "code": "MEAS",
+        "name": "Measurements"
+      },
+      "interval": null,
+      "valueType": "float",
+      "start": "2005-02-14T23:00:00Z",
+      "end": "2005-02-14T23:00:00Z",
+      "events": null
+    },
+    {
+      "url": "https://digitaldeltatest.aquadesk.nl/timeseries/db9544e4-1eb3-4f99-ac6e-b9c02a7cca88",
+      "uuid": "db9544e4-1eb3-4f99-ac6e-b9c02a7cca88",
+      "location": {
+        "uuid": "6fba498f-0b59-462b-8c34-bd456d8e7d31",
+        "url": "\\null\\",
+        "code": "NLWATB-RWTS_BERMS_0002",
+        "name": "KEIZVR",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.89443671141974,
+            51.7201856231622,
+            0
+          ]
+        },
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "observationType": {
+        "uuid": "5cd9726e-7985-4789-9674-22bec8bef325",
+        "quantity": "AANTL",
+        "unit": "n/ml",
+        "parameterCode": "Actinocyclus normanii",
+        "compartment": "OW",
+        "qualifier": "CE",
+        "extra": [
+          {
+            "key": "taxongroup",
+            "value": "DIATM"
+          },
+          {
+            "key": "type",
+            "value": "Biotaxon"
+          }
+        ]
+      },
+      "node": {
+        "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+        "name": "AquaDesk Primary",
+        "description": "AquaDesk Primary Node",
+        "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+      },
+      "datasource": {
+        "uuid": "978fdf5c-95c8-43a5-82ff-d27d9e6d685f",
+        "name": "AquaDesk Primary",
+        "node": {
+          "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+          "name": "AquaDesk Primary",
+          "description": "AquaDesk Primary Node",
+          "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+        }
+      },
+      "timeseriesType": {
+        "code": "MEAS",
+        "name": "Measurements"
+      },
+      "interval": null,
+      "valueType": "float",
+      "start": "2004-08-30T22:00:00Z",
+      "end": "2004-08-30T22:00:00Z",
+      "events": null
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{"message": "Invalid filters"}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_timeseries__uuid_"><span class="parent">/timeseries</span>/{uuid}</a> <span class="methods"><a href="#timeseries__uuid__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_timeseries__uuid_" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Get the data of one timeseries, including metadata.</p></div><div class="list-group"><div onclick="window.location.href = '#timeseries__uuid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="timeseries__uuid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/timeseries</span>/{uuid}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#timeseries__uuid__get_request" data-toggle="tab">Request</a></li><li><a href="#timeseries__uuid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="timeseries__uuid__get_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (string)</em><p>Unique identifier for the timeseries. Version 4.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>db9544e4-1eb3-4f99-ac6e-b9c02a7cca88</code></pre></div></li></ul></div><div class="tab-pane" id="timeseries__uuid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>url</strong>: <em>required (string)</em></li><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the timeseries. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable<strike></strike></strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>f4af47f5-f087-494c-9b2d-ba129bddd545</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>The qualifier of the timeseries. AquaDesk uses the uuid for this.<br>Qualifiers&colon;<font color="gray"><strike>Nullable<strike></strike></strike></font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>H.Meting</code></pre></div></li><li><strong>location</strong>: <em>required (object)</em><p>The location that the timeseries uses.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the location. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>url</strong>: <em>required (string)</em><p>The URL of the location.</p></li><li><strong>code</strong>: <em>required (string)</em><p>The code of the location.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the location..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>geometry</strong>: <em>required (object)</em><p>The GeoJSON geometry definition of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>type</strong>: <em>required (string)</em><p>The geometry type. Must have the value "Point".</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Point</code></pre></div></li><li><strong>coordinates</strong>: <em>required (array of Double)</em><p>An array of doubles, representing a coordinate.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  4.234,
+  52.3423
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the location..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></li><li><strong>observationType</strong>: <em>required (object)</em><p>The observationtype that the timeseries uses.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the observationtype. UUID Version 4.</p></li><li><strong>quantity</strong>: <em>required (string)</em><p>Defines what was measured.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>ZICHT</code></pre><pre><code>MONSTER</code></pre><pre><code>CONCTTE</code></pre><pre><code>AANTL</code></pre></div></li><li><strong>unit</strong>: <em>required (string)</em><p>Unit of measurement. Follows the Aquo standards.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>cm2</code></pre><pre><code>n</code></pre><pre><code>n/m3</code></pre><pre><code>%</code></pre><pre><code>DIMSLS</code></pre><pre><code>C</code></pre></div></li><li><strong>parameterCode</strong>: <em>(string)</em><p>Parameter code specifying the observationtype. Non-biological observation types follow the Aquo standards.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>Pediastrum</code></pre><pre><code>Ca</code></pre><pre><code>1112T4ClC2a</code></pre><pre><code>HYBDVS</code></pre></div></li><li><strong>compartment</strong>: <em>(string)</em><p>The compartment in which the measurement took place. Standardised Aquo compartments.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>OW</code></pre><pre><code>DL</code></pre><pre><code>GW</code></pre><pre><code>LW</code></pre></div></li><li><strong>qualifier</strong>: <em>(string)</em><p>Dutch&colon; &#39;Hoedanigheid&#39;. Additional qualities of the measurement.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>AD</code></pre><pre><code>JU</code></pre><pre><code>T20C</code></pre><pre><code>KO</code></pre><pre><code>BraunBS</code></pre><pre><code>WATSGL</code></pre><pre><code>WATKLM</code></pre></div></li><li><strong>extra</strong>: <em>(array of KeyValuePair)</em><p>Extra information about the measurement. Can be used to provide specific details concerning the circumstances or the object measured, etc.</p><p><strong>Items</strong>: KeyValuePair</p><div class="items"><ul><li><strong>key</strong>: <em>required (string)</em><p>The key of the key/value pair.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>taxontype</code></pre></div></li><li><strong>value</strong>: <em>required (string)</em><p>The value of the key/value pair.</p></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "key": "taxongroup",
+    "value": "DIATM"
+  },
+  {
+    "key": "type",
+    "value": "Biotaxon"
+  }
+]</code></pre></div></li></ul></li><li><strong>node</strong>: <em>required (object)</em><p>The node responsible for hosting the data for the timeseries.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>978fdf5c-95c8-43a5-82ff-d27d9e6d685f</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li><li><strong>datasource</strong>: <em>required (object)</em><p>The datasource providing the data for the timeseries..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier for the datasource. UUID Version 4<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the datasource..<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>node</strong>: <em>required (object)</em><p>The node of the datasource.</p><ul><li><strong>uuid</strong>: <em>required (string - pattern: [0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})</em><p>The unique identifier of the node. UUID Version 4.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p></li><li><strong>description</strong>: <em>required (string)</em><p>The description of the node.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>baseUrl</strong>: <em>required (string)</em><p>The base URL of the node.</p></li></ul></li></ul></li><li><strong>timeseriesType</strong>: <em>required (object)</em><p>The type of the timeseries..<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><ul><li><strong>code</strong>: <em>required (string)</em><p>The code of the timeseries type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>MEAS</code></pre></div></li><li><strong>name</strong>: <em>required (string)</em><p>The name of the timeseries type.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Measurement</code></pre></div></li></ul></li><li><strong>interval</strong>: <em>(number)</em><p>Specifies the interval between measurements for the timeseries.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>valueType</strong>: <em>(string)</em><p>The data type of the measured data.<br>Qualifiers&colon;<font color="gray"><strike>Nullable</strike></font>,<font color="green">Filterable</font>.</p></li><li><strong>start</strong>: <em>required (datetime)</em><p>Start date/time of the measurement. Uses the Zulu notation<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-01-01T12:45:00Z</code></pre></div></li><li><strong>end</strong>: <em>required (datetime)</em><p>End date/time of the measurement. Uses the Zulu notation<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="green">Filterable</font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-01-01T12:45:00Z</code></pre></div></li><li><strong>events</strong>: <em>(array of Event (minimal))</em><p>Defines a minimal event.</p><p><strong>Items</strong>: Event (minimal)</p><div class="items"><ul><li><strong>value</strong>: <em>required (number)</em><p>The value of the measured data.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>37</code></pre></div></li><li><strong>timeStamp</strong>: <em>(datetime)</em><p>The date/time when the measurement took place. Uses the Zulu notation.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-12-31T12:45:00Z</code></pre></div></li></ul></div></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "url": "https://digitaldeltatest.aquadesk.nl/timeseries/db9544e4-1eb3-4f99-ac6e-b9c02a7cca88",
+  "uuid": "db9544e4-1eb3-4f99-ac6e-b9c02a7cca88",
+  "location": {
+    "uuid": "6fba498f-0b59-462b-8c34-bd456d8e7d31",
+    "url": "https://digitaldeltatest.aquadesk.nl/locations/6fba498f-0b59-462b-8c34-bd456d8e7d31",
+    "code": "NLWATB-RWTS_BERMS_0002",
+    "name": "KEIZVR",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        4.89443671141974,
+        51.7201856231622,
+        0
+      ]
+    },
+    "node": {
+      "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+      "name": "AquaDesk Primary",
+      "description": "AquaDesk Primary Node",
+      "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+    }
+  },
+  "observationType": {
+    "uuid": "5cd9726e-7985-4789-9674-22bec8bef325",
+    "quantity": "AANTL",
+    "unit": "n/ml",
+    "parameterCode": "Actinocyclus normanii",
+    "compartment": "OW",
+    "qualifier": "CE",
+    "extra": [
+      {
+        "key": "taxongroup",
+        "value": "DIATM"
+      },
+      {
+        "key": "type",
+        "value": "Biotaxon"
+      }
+    ]
+  },
+  "node": {
+    "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+    "name": "AquaDesk Primary",
+    "description": "AquaDesk Primary Node",
+    "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+  },
+  "datasource": {
+    "uuid": "978fdf5c-95c8-43a5-82ff-d27d9e6d685f",
+    "name": "AquaDesk Primary",
+    "node": {
+      "uuid": "f4af47f5-f087-494c-9b2d-ba129bddd545",
+      "name": "AquaDesk Primary",
+      "description": "AquaDesk Primary Node",
+      "baseUrl": "https://digitaldeltatest.aquadesk.nl"
+    }
+  },
+  "timeseriesType": {
+    "code": "MEAS",
+    "name": "Measurements"
+  },
+  "interval": null,
+  "valueType": "float",
+  "start": "2004-08-30T22:00:00Z",
+  "end": "2004-08-30T22:00:00Z",
+  "events": [
+    {
+      "value": 13.81,
+      "timeStamp": "2004-08-30T22:00:00Z"
+    }
+  ]
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{"message": "Invalid time series"}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_timeseries__uuid__data"><span class="parent">/timeseries/{uuid}</span>/data</a> <span class="methods"><a href="#timeseries__uuid__data_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_timeseries__uuid__data" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>Get the detail data for the specified timeseries, excluding metadata.</p></div><div class="list-group"><div onclick="window.location.href = '#timeseries__uuid__data_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="timeseries__uuid__data_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/timeseries/{uuid}</span>/data</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#timeseries__uuid__data_get_request" data-toggle="tab">Request</a></li><li><a href="#timeseries__uuid__data_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="timeseries__uuid__data_get_request"><h3>URI Parameters</h3><ul><li><strong>uuid</strong>: <em>required (string)</em><p>Unique identifier for the timeseries. Version 4.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>db9544e4-1eb3-4f99-ac6e-b9c02a7cca88</code></pre></div></li></ul><h3>Query Parameters</h3><ul><li><strong>start</strong>: <em>(date-only)</em><p>Format&colon; yyyy-MM-dd.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-01-01</code></pre></div></li><li><strong>end</strong>: <em>(date-only)</em><p>Format&colon; yyyy-MM-dd.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2016-12-31</code></pre></div></li></ul></div><div class="tab-pane" id="timeseries__uuid__data_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of Event (detailed)</p><p><strong>Items</strong>: Event (detailed)</p><div class="items"><ul><li><strong>value</strong>: <em>required (number)</em><p>The value of the measured data.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p></li><li><strong>timeStamp</strong>: <em>(datetime)</em><p>The date/time when the measurement took place. Uses the Zulu notation.</p></li><li><strong>quality</strong>: <em>(string)</em><p>As specified in Aquo Domain Table &#39;Kwaliteitsoordeel&#39;. Specifies whether the value is considered normal, abberent, interpolated, etc. and for what reason. .<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>99</code></pre></div></li><li><strong>limitSymbol</strong>: <em>(string)</em><p>The limit symbol supplements the measured value.<br>Qualifiers&colon;<font color="green">Nullable</font>,<font color="gray"><strike>Filterable</strike></font>.</p><p><strong>Examples</strong>:</p><div class="examples"><pre><code>&lt;</code></pre><pre><code>&gt;</code></pre><pre><code>=</code></pre></div></li></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "value": 13.81,
+    "timeStamp": "2004-08-30T22:00:00Z",
+    "quality": "",
+    "limitSymbol": null
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{"message": "Invalid time series"}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#datasources">/datasources</a></li><li><a href="#nodes">/nodes</a></li><li><a href="#observationtypes">/observationtypes</a></li><li><a href="#locations">/locations</a></li><li><a href="#timeseries">/timeseries</a></li></ul></div></div></div></div></body></html>
