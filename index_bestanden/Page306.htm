@@ -146,7 +146,7 @@ left:452px;top:343px;width:1007px;height:5803px'>
   lang=en-US style='font-size:20.0pt;line-height:119%;font-family:"Amasis MT Pro Black";
   color:#4472C4;language:en-US'>Delta</span><span lang=en-US style='font-size:
   20.0pt;line-height:119%;font-family:"Amasis MT Pro Black";color:#0070C0;
-  language:en-US'> Api (Uni-API)</span></p>
+  language:en-US'> Api (DD-API V3)</span></p>
   <h3 style='margin-bottom:14.0pt'><span lang=en-US style='font-size:18.0pt;
   font-family:Cambria;color:#0070C0;language:en-US'>Terugblik</span></h3>
   <p class=FirstParagraph style='margin-top:0pt;margin-bottom:12.0pt'><span
@@ -315,7 +315,7 @@ left:452px;top:343px;width:1007px;height:5803px'>
   <p class=Compact style='margin-left:56.6464pt;text-indent:-28.3464pt;
   margin-top:0pt;margin-bottom:0pt'><span style='direction:ltr;unicode-bidi:
   embed;font-family:Symbol;font-size:10.0pt;language:x-none;color:black'>-</span><span
-  style='width:23.5pt'>&nbsp;</span><span lang=en-US style='language:en-US'>Eerste Proof of Concept wordt gemaakt in .NET Core/Standard. Overzetten naar Python moet redelijk eenvoudig gaan.</span></p>
+  style='width:23.5pt'>&nbsp;</span><span lang=en-US style='language:en-US'>Eerste Proof of Concept is gemaakt in .NET Core/Standard en <a href="https://github.com/DigitaleDeltaOrg/dd-api-v3-CSharp">is hier beschikbaar</a>. Overzetten naar Python moet redelijk eenvoudig gaan.</span></p>
   <p class=Compact style='margin-left:56.6464pt;text-indent:-28.3464pt;
   margin-top:0pt;margin-bottom:0pt'><span style='direction:ltr;unicode-bidi:
   embed;font-family:Symbol;font-size:10.0pt;language:x-none;color:black'>-</span><span
@@ -325,50 +325,8 @@ left:452px;top:343px;width:1007px;height:5803px'>
   <p class=Compact style='margin-left:28.3pt;margin-top:0pt;margin-bottom:0pt'><span
   lang=en-US style='language:en-US'>&nbsp;</span></p>
   <p class=MsoBodyText style='margin-bottom:12.0pt'><span lang=en-US
-  style='font-size:12.0pt;font-family:Calibri;language:en-US'>Voor deze Proof of Concept wordt gebruik gemaakt van een PostgreSQL database, een snelle, platform-onafhankelijke database waarvoor geen licentie nodig is. Met kleine aanpassingen zijn andere databases echter ook te gebruiken.</span></p>
-  <h3 style='margin-bottom:14.0pt'><span lang=en-US style='font-size:18.0pt;
-  font-family:Cambria;color:#0070C0;language:en-US'>Database model</span></h3>
-  <p class=FirstParagraph style='margin-top:0pt;margin-bottom:12.0pt'><span
-  lang=en-US style='language:en-US'>Een conventioneel database model is onbruikbaar voor een generiek concept als dit. In een conventioneel model zouden alle velden uitgeschreven zijn in de tabel. Dat zou leiden tot veel niet-gebruikte velden, veel schema mutaties, en grote schema's. Daarnaast zou dit niet alleen voor metingen, maar ook voor parameters, grootheden, eenheden, etc. moeten gebeuren.</span></p>
-  <p class=MsoBodyText style='margin-bottom:12.0pt'><span lang=en-US
-  style='font-size:12.0pt;font-family:Calibri;language:en-US'>Daarom is er een onconventioneel database model gebruikt. Hierin worden entiteit-typen (metingen, parameters, etc.) vastgelegd. Bij een entiteit-type wordt ook vastgelegd welke eigenschap-types bij deze entiteit horen. Op deze manier ontstaat een definitie van welke eigenschappen bij welke entiteiten kunnen worden vastgelegd: er ontstaat een virtueel datamodel. Entiteiten kunnen weer relaties hebben met andere entiteiten, maar eigenschappen kunnen ook weer verwijzen naar andere entiteiten.</span></p>
-  <p class=MsoBodyText style='margin-bottom:12.0pt'><span lang=en-US
-  style='font-size:12.0pt;font-family:Calibri;language:en-US'>Daarnaast heeft iedere entiteit-type en eigenschap-type een middel om naar Aquo te verwijzen, door middel van een RDF-definitie. </span></p>
-  <p class=MsoBodyText style='text-indent:0pt;margin-bottom:12.0pt'><span
-  lang=en-US style='font-size:12.0pt;font-family:Calibri;language:en-US'>&nbsp;</span></p>
-  <p class=MsoBodyText style='page-break-after:avoid;text-indent:0pt;
-  margin-bottom:12.0pt'><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
-   coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
-   filled="f" stroked="f">
-   <v:stroke joinstyle="miter"/>
-   <v:formulas>
-    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
-    <v:f eqn="sum @0 1 0"/>
-    <v:f eqn="sum 0 0 @1"/>
-    <v:f eqn="prod @2 1 2"/>
-    <v:f eqn="prod @3 21600 pixelWidth"/>
-    <v:f eqn="prod @3 21600 pixelHeight"/>
-    <v:f eqn="sum @0 0 1"/>
-    <v:f eqn="prod @6 1 2"/>
-    <v:f eqn="prod @7 21600 pixelWidth"/>
-    <v:f eqn="sum @8 21600 0"/>
-    <v:f eqn="prod @7 21600 pixelHeight"/>
-    <v:f eqn="sum @10 21600 0"/>
-   </v:formulas>
-   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
-   <o:lock v:ext="edit" aspectratio="t"/>
-  </v:shapetype><v:shape id="Afbeelding_x0020_1" o:spid="_x0000_s1031" type="#_x0000_t75"
-   alt="Database schema van Linked Snowflake&#10;" style='width:175.07617mm;
-   height:139.12969mm;mso-position-horizontal:absolute' o:cliptowrap="t">
-   <v:imagedata src="image311.png" o:title="image001"/>
-   <o:lock v:ext="edit" ungrouping="t" grouping="t"/>
-  </v:shape><![endif]--><![if !word & !ppt & !excel & !vml]><img width=665
-  height=529 src=image3111.jpg alt="Database schema van Linked Snowflake&#10;"><![endif]></p>
-  <p class=MsoCaption style='text-indent:0pt;margin-bottom:12.0pt'><span
-  lang=en-US style='font-size:10.0pt;font-family:Calibri;language:en-US'>Figuur 1:</span><span
-  lang=en-US style='font-size:10.0pt;font-family:Calibri;color:black;
-  language:en-US'>Voorlopig database </span><span lang=en-US style='font-size:
-  10.0pt;font-family:Calibri;language:en-US'>schema</span></p>
+  style='font-size:12.0pt;font-family:Calibri;language:en-US'>Voor deze Proof of Concept wordt gebruik gemaakt van een PostgreSQL database, een snelle, platform-onafhankelijke database waarvoor geen licentie nodig is. Dit databasemodel is <b>NIET</b> bedoelt voor productiedoeleinden, maar is er om de scheiding tussen OData model en opslagmodel te illustreren.</span></p>
+  
   <h3 style='margin-bottom:14.0pt'><span lang=en-US style='font-size:18.0pt;
   font-family:Cambria;color:#0070C0;language:en-US'>Van datamodel naar OData</span></h3>
   <p class=FirstParagraph style='text-indent:0pt;margin-top:0pt;margin-bottom:
