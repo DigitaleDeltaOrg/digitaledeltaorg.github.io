@@ -1,124 +1,671 @@
 <html lang="nl">
-    <head>
-        <title>Digitale Delta</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <style>
-            h1 { color: #0070c0}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    <img src="DigitalDeltaLogoOptimized.svg" width="200"/>
-                </div>
-                <div class="col-6">
-                    <a href="https://ihw.nl"><img src="logo_informatiehuis_water.svg" width="350"></a>
-                </div>
+
+<head>
+    <title>Digitale Delta</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        h1 {
+            color: #0070c0
+        }
+        a.external {
+    text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img src="DigitalDeltaLogoOptimized.svg" alt="Digitale Delta" />
             </div>
-            <div class="row">
-                <h1>Digitale Delta</h1>
-            </div>
-            <div class="row">
-                <p>
-                    In de Digitale Delta werken waterbeherende overheden op lokaal, regionaal en nationaal niveau samen met marktpartijen die software-producten en advies leveren voor waterbeheer en kennisinstituten.
-                </p>
-            </div>
-            <div class="row">
-                <p>
-                    De Digitale Delta richt zich op efficiënt en integraal waterbeheer. Het doel is waterbeheergegevens eenvoudig beschikbaar te stellen aan de eigen organisatie en aan organisaties waarmee wordt samengewerkt. Hierdoor kan waterbeheer, ook over verschillenden stroom- en beheersgebieden, slimmer en effectiever worden uitgevoerd.
-                </p>
-            </div>
-            <div class="row">
-                <h1>Wat biedt de Digitale Delta</h1>
-            </div>
-            <div class="row">
-                <p>
-                    Een gestroomlijnde, uniforme informatiedeling zorgt ervoor dat snel en adequaat kan worden geanticipeerd en gereageerd op acute en structurele veranderingen in de waterhuishouding.
-                </p>
-                <p>
-                    Ketenpartijen in het waterbeheer kunnen door Digitale Delta bij applicatieontwikkeling voortbouwen op actuele, continu toenemende en verrijkte data. 
-                </p>
-                <p>
-                    Waterbeherende overheden kunnen applicaties en visualisaties van verschillende leveranciers gemakkelijk en kosteneffectief combineren voor een integrale aanpak van  waterbeheer en gebiedsontwikkeling.
-                </p>
-                <p>
-                    Beschikbare gegevens kunnen worden getoond in viewers en desgewenst worden bijgehouden in catalogi. Deze kunnen regionaal of thematisch ingestoken zijn of geënt op gebruik binnen een operationeel kader, bijvoorbeeld voor specifieke analyses.
-                </p>
-            </div>
-            <div class="row">
-                <h1>Digitale Delta-API</h1>
-            </div>
-            <div class="row">
-                <p>
-                    De data worden ontsloten via de DD-API (Digitale Delta Application Programming Interface), die in een set van definities en regels voorziet, op basis waarvan data gevraagd en geleverd wordt.
-                </p>
-                <p>
-                    De Digitale Delta API kent open specificaties, is niet merk-, omgevings- of systeemgebonden en is vrij te gebruiken onder licentie.
-                </p>
-                <p>
-                    In 2023 heeft het Informatiehuis Water in samenwerking met EcoSys en Vortech een door het ministerie van Binnenlandse Zaken gefinancierd Proof of Concept uitgevoerd.
-                </p>
-                <p>
-                    Het doel van dit onderzoek was om de specificaties voor DD-API versie 3.0 in kaart te brengen. De resultaten zijn vastgelegd in het onderzoeksrapport ‘Beantwoording onderzoeksvragen PoC DD-API specificatie en implementatie’.
-                </p>
-                <p>
-                    Geconcludeerd is dat de DD-API de samenwerking tussen Nederlandse waterbeheerders, kennisinstituten en marktpartijen kan vereenvoudigen omdat data bij bron blijft en op een uniforme en gestandaardiseerde manier gedeeld kan worden met andere partijen.
-                </p>
-            </div>
-            <div class="row">
-                <h1>Digitale Delta Community</h1>
-            </div>
-            <div class="row">
-                <p>
-                    In juni 2023 is de Digitale Delta Community opgericht. In deze gebruikersgroep kunnen resultaten en ontwikkelingen worden toegelicht en kunnen gebruikerswensen worden geïnventariseerd.
-                </p>
-                <p>
-                    Er wordt ook gewerkt aan de opzet van een technisch geori&euml;nteerde werkgroep. Deze werkgroep gaat vooral adviseren op het gebied van informatiebeveiliging, standaardisatiethema’s (sets met afspraken, documentatie, richtlijnen, et cetera), de aansluiting met de Aquo-standaard en de documentatie van de DD-API.
-                </p>
-            </div>
-            <div class="row">
-                <h1>Beheer van de Digitale Delta API</h1>
-            </div>
-            <div class="row">
-                <p>
-                    Het beheer van de Digitale Delta API is op verzoek van de partners ondergebracht bij <a href="https://ihw.nl">het Informatiehuis Water</a>. Hiermee is de toepassing van de Aquo-standaard geborgd en is de uitwisseling van brongegevens zonder (tussen)opslag volgens de FAIR-uitgangspunten vereenvoudigd.
-                </p>
-            </div>
-            <div class="row">
-                <h1>Technische beschrijvingen</h1>
-            </div>
-            <div class="row">
-                <p>De Digitale Delta formaten (DD-API, DD-ECO-API en DD-API V3) zijn technische beschrijvingen.</p>
-                <p>Voor meer informatie hierover, kunt u de volgende pagina's raadplegen:</p>
-            </div>
-            <div class="row">
-                <table class="table">
-                    <tr>
-                        <th>API</th>
-                        <th>Omschrijving</th>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/DigitaleDeltaOrg/dd-api">DD-API V2</a></td>
-                        <td>Tijdsreeksen (chemisch, fysisch)</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/DigitaleDeltaOrg/dd-eco-api">DD-ECO-API</a></td>
-                        <td>Observaties (ecologisch, chemisch, physisch)</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/DigitaleDeltaOrg/dd-api-v3">DD-API V3</a></td>
-                        <td>OData en OM&S gebaseerd: Observaties, tijdseries, roosters (ecologisch, chemisch, fysisch)</td>
-                    </tr>
-                </table>
+            <div class="col-6">
+                <a href="https://ihw.nl"><img src="logo_informatiehuis_water.svg" alt="Informatiehuis Water"></a>
             </div>
         </div>
-    </body>
+        <div class="row">
+            <h1>Digitale Delta API</h1>
+        </div>
+        <div class="row">
+            <p>
+                Organisaties die de Digitale Delta API op hun applicatie of database hebben geïmplementeerd, kunnen hun
+                data op een
+                uniforme en eenvoudige manier laten doorzoeken. Gebruikers krijgen de beschikking over betrouwbare
+                meetgegevens omdat
+                die voldoen aan de standaarden die van belang zijn voor de watersector.
+            </p>
+        </div>
+        <div class="row">
+            <p>
+                De DD API-specificatie 3.0 is breed toepasbaar. De uitwisseling van verschillende soorten meetdata
+                (zoals tijdreeksen,
+                rasterdata en verwachtingen) wordt ondersteund voor meerdere toepassingsgebieden (waterkwaliteit,
+                waterkwantiteit, ecologie
+                en waterzuivering). De zoek- en filtermechanismen zijn voor al deze toepassingen hetzelfde.
+            </p>
+            <p>
+                De Digitale Delta API kan dan ook grote toegevoegde waarde hebben voor alle waterbeheerders die
+                metingen/verwachtingen
+                nodig hebben om waterbeherend werk te kunnen uitvoeren.
+            </p>
+        </div>
+        <div class="row">
+            <h1>Wat is de Digitale Delta API?</h1>
+        </div>
+        <div class="row">
+            <p>
+                Een gestroomlijnde, uniforme informatiedeling zorgt ervoor dat snel en adequaat kan worden geanticipeerd
+                en
+                gereageerd op acute en structurele veranderingen in de waterhuishouding. Ketenpartijen in het
+                waterbeheer kunnen
+                door Digitale Delta bij applicatieontwikkeling voortbouwen op actuele, continu toenemende en verrijkte
+                data.
+                Waterbeherende overheden kunnen applicaties en visualisaties van verschillende leveranciers gemakkelijk
+                en
+                kosteneffectief combineren voor een integrale aanpak van waterbeheer en gebiedsontwikkeling.
+            </p>
+            <p>
+                Beschikbare gegevens kunnen worden getoond in viewers en desgewenst worden bijgehouden in catalogi.
+                Deze kunnen regionaal of thematisch ingestoken zijn of geënt op gebruik binnen een operationeel kader,
+                bijvoorbeeld voor specifieke analyses.
+            </p>
+            <p>
+                <img src="uitleg-digitale-delta-api.png" />
+            </p>
+        </div>
+        <div class="row">
+            <h1>Digitale Delta API 3.0</h1>
+        </div>
+        <div class="row">
+            <p>
+                In versie 3.0 van de Digitale Delta API-specificatie zijn verschillende varianten van de DD API
+                geïntegreerd tot één sterke API
+                voor de watersector. De Digitale Delta API 3.0 omvat een open en niet merk-, omgevings- of
+                systeemgebonden specificatie die
+                door iedereen vrij gebruikt kan worden zonder licentie. Er is ook een open source implementatie
+                beschikbaar die als
+                uitgangspunt kan worden gebruikt door aanbieders.
+            </p>
+            <p>
+                Bekijk de video over slim watermanagement <a
+                    href="https://www.digitaleoverheid.nl/nieuws/slim-watermanagement-met-de-digitale-delta-api/?pk_campaign=nieuwsbrief-5-2024">hier<i class="bi bi-arrow-up-right-square"></i></a>.
+            </p>
+        </div>
+        <div class="row">
+            <h1>Aan welke standaarden voldoet de DD API 3.0?</h1>
+        </div>
+        <div class="row">
+            <p>
+                De DD API-specificatie is gebaseerd op <a href="https://github.com/opengeospatial/om-swg">OMS<i class="bi bi-arrow-up-right-square"></i></a> (de
+                19156:2023 standaard voor Observations, Measurements and Samples)
+                en voldoet aan diverse (inter)nationale standaarden die van belang zijn voor gegevensuitwisseling binnen
+                en door de watersector,
+                zoals <a href="https://odata.org">OData<i class="bi bi-arrow-up-right-square"></i></a>, <a
+                    href="https://www.ogc.org/standard/tsml/">TimeseriesML<i class="bi bi-arrow-up-right-square"></i></a>, <a
+                    href="https://github.com/opengeospatial/CoverageJSON">CoverageJSON<i class="bi bi-arrow-up-right-square"></i></a>,
+                <a href="https://oauth.net/2/">OAuth2.0<i class="bi bi-arrow-up-right-square"></i></a> en de standaard voor API's van het Forum Standaardisatie.
+            </p>
+            <p>
+                Voor de betekenis van de datavelden wordt gebruik gemaakt van de termen en definities uit:
+            </p>
+            <ul>
+                <li>de <a href="https://www.aquo.nl">Aquo-standaard<i class="bi bi-arrow-up-right-square"></i></a> voor waterdata</li>
+                <li>de <a href="https://taxainfo.nl">TWN-lijst<i class="bi bi-arrow-up-right-square"></i></a> (Taxa Waterbeheer Nederland)</li>
+                <li><a href="https://github.com/Unidata/netcdf-c">netCDF<i class="bi bi-arrow-up-right-square"></i></a> voor (wetenschappelijke) data voor
+                    hydrologische en meteorologische toepassingen</li>
+                <li>de door het KNMI gevolgde richtlijnen van de <a href="https://wmo.int/">Wereld Meteorologische
+                        Organisatie<i class="bi bi-arrow-up-right-square"></i></a> (WMO)</li>
+            </ul>
+        </div>
+        <div class="row">
+            <h1>Digitale Delta Community</h1>
+        </div>
+        <div class="row">
+            <p>
+                De Digitale Delta Community is een gebruikersgroep waarin gebruikerswensen over de Digitale Delta API
+                worden geïnventariseerd
+                en resultaten en ontwikkelingen worden toegelicht.
+            </p>
+            <p>
+                Wil je informatie ophalen over de Digitale Delta API versie 3? Of wil je meedenken over of bijdragen aan
+                de doorontwikkeling
+                van de Digitale Delta API? Meld je dan aan voor de bijeenkomsten van de DD API Community!
+            </p>
+            <p>
+                Je vindt de data in onze online <a href="https://ihw.nl/agenda">Agenda | Informatiehuis Water<i class="bi bi-arrow-up-right-square"></i></a>
+                (ihw.nl).
+            </p>
+        </div>
+        <div class="row">
+            <h2>Technische werkgroep</h2>
+        </div>
+        <div class="row">
+            <p>
+                Er wordt ook gewerkt aan de opzet van een technisch georiënteerde werkgroep.
+                Deze werkgroep gaat vooral adviseren op het gebied van informatiebeveiliging,
+                standaardisatiethema's (sets met afspraken, documentatie, richtlijnen, et cetera),
+                de aansluiting met de Aquo-standaard en de documentatie van de DD API.
+            </p>
+        </div>
+        <div class="row">
+            <h1>Beheer van de Digitale Delta API</h1>
+        </div>
+        <div class="row">
+            <p>
+                Het beheer van de Digitale Delta API is op verzoek van Rijkswaterstaat, de waterschappen en provincies
+                ondergebracht
+                bij het Informatiehuis Water.
+            </p>
+            <p>
+                De Architecture Board van de DD API bestaat uit het Informatiehuis Water, EcoSys en VORtech.
+            </p>
+        </div>
+        <div class="row">
+            <h1>Technische beschrijvingen</h1>
+        </div>
+        <div class="row">
+            <p>De Digitale Delta formaten (DD-API, DD-ECO-API en DD-API V3) zijn technische beschrijvingen.</p>
+            <p>Voor meer informatie hierover, kunt u de volgende pagina's raadplegen:</p>
+        </div>
+        <div class="row">
+            <table class="table">
+                <colgroup>
+                    <col style="width: 200px">
+                    <col>
+                </colgroup>
+                <tr>
+                    <th>API</th>
+                    <th>Omschrijving</th>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/DigitaleDeltaOrg/dd-api">DD-API V2<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    <td>Tijdsreeksen (chemisch, fysisch)</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/DigitaleDeltaOrg/dd-eco-api">DD-ECO-API<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    <td>Observaties (ecologisch, chemisch, fysisch)</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/DigitaleDeltaOrg/dd-api-v3">DD-API V3<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    <td>OData en OM&S gebaseerd: Observaties, tijdseries, roosters (ecologisch, chemisch, fysisch)</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <p>
+                De DD-API V3 is volop in ontwikkeling. Er zijn al diverse Open Source projecten die bijdragen aan of
+                gebruikmaken van de specificatie.
+            </p>
+        </div>
+        <div class="row">
+            <h2>Open source projecten</h2>
+        </div>
+        <div class="row">
+            <table class="table">
+                <colgroup>
+                    <col style="width: 200px">
+                    <col>
+                </colgroup>
+                <tr>
+                    <th>Project</th>
+                    <th>Beschrijving</th>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/DigitaleDeltaOrg/dd-api-v3-Csharp">DD-API V3 Open source
+                            voorbeeldimplementatie<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    <td>Voorbeeldimplementatie in C# voor Postgres. Bevat o.a. een voorbeeld van het omzetten van een
+                        OData zoekopdracht naar een opslagmodel.</td>
+                </tr>
+                <tr>
+                    <td><a href="https://github.com/DigitaleDeltaOrg/dd-api-v3-validator">DD-API V3 $metadata
+                            validator<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    <td>Valideert een opgegeven DD-API V3 endpoint.</td>
+                </tr>
+                <tr>
+                    <td><a
+                            href="https://github.com/DigitaleDeltaOrg/dd-api-v3/blob/main/definition/semantic/v2023.01/2024.01.txt">DD-API
+                            V3 validatiebestand<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    <td>(meest recente) bronbestand voor validatie t.b.v. de metadata validator</td>
+                </tr>
+                <tr>
+                    <td><a href="https://ddapi-ui.ecosys.nl/">DD API V3 UI<i class="bi bi-arrow-up-right-square"></td>
+                    <td>Dit is een website waarmee eenvoudig DD API V3 zoekopdrachten te maken zijn. Dit is werk in uitvoering.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="row">
+            <h1>Aanbieders</h1>
+        </div>
+        <div class="row">
+        <table class="table">
+            <colgroup>
+                <col style="width: 200px">
+                <col style="width: 200px">
+                <col style="width: 400px">
+                <col>
+            </colgroup>
+            <tr>
+                <th>Implementatie</th>
+                <th>Status</th>
+                <th>Beschrijving</th>
+                <th>Toegang</th>
+            </tr>
+            <tr>
+                <td>AquaDesk (geen tijdsreeksen)</td>
+                <td>Gereed</td>
+                <td>Ontsluiting van ecologisch/fysisch/chemische data van verschillende waterbeheerders</td>
+                <td><a href="https://ddapi.aquadesk.nl">https://ddapi.aquadesk.nl<i class="bi bi-arrow-up-right-square"></i></a></td>
+            </tr>
+            <tr>
+                <td>SOVOn</td>
+                <td>Gepland</td>
+                <td>Ontsluiting van RWS vogeldata</td>
+                <td>Onbekend</td>
+            </tr>
+            <tr>
+                <td>Wageningen Marine Research</td>
+                <td>Gepland</td>
+                <td>Ontsluiting van RWS vis-data</td>
+                <td>Onbekend</td>
+            </tr>
+            <tr>
+                <td>AQUON</td>
+                <td>Gereed, in test</td>
+                <td>Ontsluiting van sensor data van verschillende waterschappen</td>
+                <td>><a href="https://api.aquon.nl">https://api.aquon.nl<i class="bi bi-arrow-up-right-square"></i></a></td>
+            </tr>
+            <tr>
+                <td>WADAR (RWS)</td>
+                <td>Gepland</td>
+                <td>Ontsluiting van chemische data van RWS</td>
+                <td>Onbekend</td>
+            </tr>
+        </table>
+        <html lang="nl">
+
+        <head>
+            <title>Digitale Delta</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+            <style>
+                h1 {
+                    color: #0070c0
+                }
+                a.external {
+            text-decoration: none;
+                }
+            </style>
+        </head>
+        
+        <body>
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="DigitalDeltaLogoOptimized.svg" alt="Digitale Delta" />
+                    </div>
+                    <div class="col-6">
+                        <a href="https://ihw.nl"><img src="logo_informatiehuis_water.svg" alt="Informatiehuis Water"></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <h1>Digitale Delta API</h1>
+                </div>
+                <div class="row">
+                    <p>
+                        Organisaties die de Digitale Delta API op hun applicatie of database hebben geïmplementeerd, kunnen hun
+                        data op een
+                        uniforme en eenvoudige manier laten doorzoeken. Gebruikers krijgen de beschikking over betrouwbare
+                        meetgegevens omdat
+                        die voldoen aan de standaarden die van belang zijn voor de watersector.
+                    </p>
+                </div>
+                <div class="row">
+                    <p>
+                        De DD API-specificatie 3.0 is breed toepasbaar. De uitwisseling van verschillende soorten meetdata
+                        (zoals tijdreeksen,
+                        rasterdata en verwachtingen) wordt ondersteund voor meerdere toepassingsgebieden (waterkwaliteit,
+                        waterkwantiteit, ecologie
+                        en waterzuivering). De zoek- en filtermechanismen zijn voor al deze toepassingen hetzelfde.
+                    </p>
+                    <p>
+                        De Digitale Delta API kan dan ook grote toegevoegde waarde hebben voor alle waterbeheerders die
+                        metingen/verwachtingen
+                        nodig hebben om waterbeherend werk te kunnen uitvoeren.
+                    </p>
+                </div>
+                <div class="row">
+                    <h1>Wat is de Digitale Delta API?</h1>
+                </div>
+                <div class="row">
+                    <p>
+                        Een gestroomlijnde, uniforme informatiedeling zorgt ervoor dat snel en adequaat kan worden geanticipeerd
+                        en
+                        gereageerd op acute en structurele veranderingen in de waterhuishouding. Ketenpartijen in het
+                        waterbeheer kunnen
+                        door Digitale Delta bij applicatieontwikkeling voortbouwen op actuele, continu toenemende en verrijkte
+                        data.
+                        Waterbeherende overheden kunnen applicaties en visualisaties van verschillende leveranciers gemakkelijk
+                        en
+                        kosteneffectief combineren voor een integrale aanpak van waterbeheer en gebiedsontwikkeling.
+                    </p>
+                    <p>
+                        Beschikbare gegevens kunnen worden getoond in viewers en desgewenst worden bijgehouden in catalogi.
+                        Deze kunnen regionaal of thematisch ingestoken zijn of geënt op gebruik binnen een operationeel kader,
+                        bijvoorbeeld voor specifieke analyses.
+                    </p>
+                    <p>
+                        <img src="uitleg-digitale-delta-api.png" />
+                    </p>
+                </div>
+                <div class="row">
+                    <h1>Digitale Delta API 3.0</h1>
+                </div>
+                <div class="row">
+                    <p>
+                        In versie 3.0 van de Digitale Delta API-specificatie zijn verschillende varianten van de DD API
+                        geïntegreerd tot één sterke API
+                        voor de watersector. De Digitale Delta API 3.0 omvat een open en niet merk-, omgevings- of
+                        systeemgebonden specificatie die
+                        door iedereen vrij gebruikt kan worden zonder licentie. Er is ook een open source implementatie
+                        beschikbaar die als
+                        uitgangspunt kan worden gebruikt door aanbieders.
+                    </p>
+                    <p>
+                        Bekijk de video over slim watermanagement <a
+                            href="https://www.digitaleoverheid.nl/nieuws/slim-watermanagement-met-de-digitale-delta-api/?pk_campaign=nieuwsbrief-5-2024">hier<i class="bi bi-arrow-up-right-square"></i></a>.
+                    </p>
+                </div>
+                <div class="row">
+                    <h1>Aan welke standaarden voldoet de DD API 3.0?</h1>
+                </div>
+                <div class="row">
+                    <p>
+                        De DD API-specificatie is gebaseerd op <a href="https://github.com/opengeospatial/om-swg">OMS<i class="bi bi-arrow-up-right-square"></i></a> (de
+                        19156:2023 standaard voor Observations, Measurements and Samples)
+                        en voldoet aan diverse (inter)nationale standaarden die van belang zijn voor gegevensuitwisseling binnen
+                        en door de watersector,
+                        zoals <a href="https://odata.org">OData<i class="bi bi-arrow-up-right-square"></i></a>, <a
+                            href="https://www.ogc.org/standard/tsml/">TimeseriesML<i class="bi bi-arrow-up-right-square"></i></a>, <a
+                            href="https://github.com/opengeospatial/CoverageJSON">CoverageJSON<i class="bi bi-arrow-up-right-square"></i></a>,
+                        <a href="https://oauth.net/2/">OAuth2.0<i class="bi bi-arrow-up-right-square"></i></a> en de standaard voor API's van het Forum Standaardisatie.
+                    </p>
+                    <p>
+                        Voor de betekenis van de datavelden wordt gebruik gemaakt van de termen en definities uit:
+                    </p>
+                    <ul>
+                        <li>de <a href="https://www.aquo.nl">Aquo-standaard<i class="bi bi-arrow-up-right-square"></i></a> voor waterdata</li>
+                        <li>de <a href="https://taxainfo.nl">TWN-lijst<i class="bi bi-arrow-up-right-square"></i></a> (Taxa Waterbeheer Nederland)</li>
+                        <li><a href="https://github.com/Unidata/netcdf-c">netCDF<i class="bi bi-arrow-up-right-square"></i></a> voor (wetenschappelijke) data voor
+                            hydrologische en meteorologische toepassingen</li>
+                        <li>de door het KNMI gevolgde richtlijnen van de <a href="https://wmo.int/">Wereld Meteorologische
+                                Organisatie<i class="bi bi-arrow-up-right-square"></i></a> (WMO)</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <h1>Digitale Delta Community</h1>
+                </div>
+                <div class="row">
+                    <p>
+                        De Digitale Delta Community is een gebruikersgroep waarin gebruikerswensen over de Digitale Delta API
+                        worden geïnventariseerd
+                        en resultaten en ontwikkelingen worden toegelicht.
+                    </p>
+                    <p>
+                        Wil je informatie ophalen over de Digitale Delta API versie 3? Of wil je meedenken over of bijdragen aan
+                        de doorontwikkeling
+                        van de Digitale Delta API? Meld je dan aan voor de bijeenkomsten van de DD API Community!
+                    </p>
+                    <p>
+                        Je vindt de data in onze online <a href="https://ihw.nl/agenda">Agenda | Informatiehuis Water<i class="bi bi-arrow-up-right-square"></i></a>
+                        (ihw.nl).
+                    </p>
+                </div>
+                <div class="row">
+                    <h2>Technische werkgroep</h2>
+                </div>
+                <div class="row">
+                    <p>
+                        Er wordt ook gewerkt aan de opzet van een technisch georiënteerde werkgroep.
+                        Deze werkgroep gaat vooral adviseren op het gebied van informatiebeveiliging,
+                        standaardisatiethema's (sets met afspraken, documentatie, richtlijnen, et cetera),
+                        de aansluiting met de Aquo-standaard en de documentatie van de DD API.
+                    </p>
+                </div>
+                <div class="row">
+                    <h1>Beheer van de Digitale Delta API</h1>
+                </div>
+                <div class="row">
+                    <p>
+                        Het beheer van de Digitale Delta API is op verzoek van Rijkswaterstaat, de waterschappen en provincies
+                        ondergebracht
+                        bij het Informatiehuis Water.
+                    </p>
+                    <p>
+                        De Architecture Board van de DD API bestaat uit het Informatiehuis Water, EcoSys en VORtech.
+                    </p>
+                </div>
+                <div class="row">
+                    <h1>Technische beschrijvingen</h1>
+                </div>
+                <div class="row">
+                    <p>De Digitale Delta formaten (DD-API, DD-ECO-API en DD-API V3) zijn technische beschrijvingen.</p>
+                    <p>Voor meer informatie hierover, kunt u de volgende pagina's raadplegen:</p>
+                </div>
+                <div class="row">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 200px">
+                            <col>
+                        </colgroup>
+                        <tr>
+                            <th>API</th>
+                            <th>Omschrijving</th>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/DigitaleDeltaOrg/dd-api">DD-API V2<i class="bi bi-arrow-up-right-square"></i></a></td>
+                            <td>Tijdsreeksen (chemisch, fysisch)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/DigitaleDeltaOrg/dd-eco-api">DD-ECO-API<i class="bi bi-arrow-up-right-square"></i></a></td>
+                            <td>Observaties (ecologisch, chemisch, fysisch)</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/DigitaleDeltaOrg/dd-api-v3">DD-API V3<i class="bi bi-arrow-up-right-square"></i></a></td>
+                            <td>OData en OM&S gebaseerd: Observaties, tijdseries, roosters (ecologisch, chemisch, fysisch)</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <p>
+                        De DD-API V3 is volop in ontwikkeling. Er zijn al diverse Open Source projecten die bijdragen aan of
+                        gebruikmaken van de specificatie.
+                    </p>
+                </div>
+                <div class="row">
+                    <h2>Open source projecten</h2>
+                </div>
+                <div class="row">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 200px">
+                            <col>
+                        </colgroup>
+                        <tr>
+                            <th>Project</th>
+                            <th>Beschrijving</th>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/DigitaleDeltaOrg/dd-api-v3-Csharp">DD-API V3 Open source
+                                    voorbeeldimplementatie<i class="bi bi-arrow-up-right-square"></i></a></td>
+                            <td>Voorbeeldimplementatie in C# voor Postgres. Bevat o.a. een voorbeeld van het omzetten van een
+                                OData zoekopdracht naar een opslagmodel.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://github.com/DigitaleDeltaOrg/dd-api-v3-validator">DD-API V3 $metadata
+                                    validator<i class="bi bi-arrow-up-right-square"></i></a></td>
+                            <td>Valideert een opgegeven DD-API V3 endpoint.</td>
+                        </tr>
+                        <tr>
+                            <td><a
+                                    href="https://github.com/DigitaleDeltaOrg/dd-api-v3/blob/main/definition/semantic/v2023.01/2024.01.txt">DD-API
+                                    V3 validatiebestand<i class="bi bi-arrow-up-right-square"></i></a></td>
+                            <td>(meest recente) bronbestand voor validatie t.b.v. de metadata validator</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://ddapi-ui.ecosys.nl/">DD API V3 UI<i class="bi bi-arrow-up-right-square"></td>
+                            <td>Dit is een website waarmee eenvoudig DD API V3 zoekopdrachten te maken zijn. Dit is werk in uitvoering.</td>
+                        </tr>
+                    </table>
+                </div>
+        
+                <div class="row">
+                    <h1>Aanbieders</h1>
+                </div>
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 200px">
+                        <col style="width: 200px">
+                        <col style="width: 400px">
+                        <col>
+                    </colgroup>
+                    <tr>
+                        <th>Implementatie</th>
+                        <th>Status</th>
+                        <th>Beschrijving</th>
+                        <th>Toegang</th>
+                    </tr>
+                    <tr>
+                        <td>AquaDesk (geen tijdsreeksen)</td>
+                        <td>Gereed</td>
+                        <td>Ontsluiting van ecologisch/fysisch/chemische data van verschillende waterbeheerders</td>
+                        <td><a href="https://ddapi.aquadesk.nl">https://ddapi.aquadesk.nl<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>SOVOn</td>
+                        <td>Gepland</td>
+                        <td>Ontsluiting van RWS vogeldata</td>
+                        <td>Onbekend</td>
+                    </tr>
+                    <tr>
+                        <td>Wageningen Marine Research</td>
+                        <td>Gepland</td>
+                        <td>Ontsluiting van RWS vis-data</td>
+                        <td>Onbekend</td>
+                    </tr>
+                    <tr>
+                        <td>AQUON</td>
+                        <td>Gereed, in test</td>
+                        <td>Ontsluiting van sensor data van verschillende waterschappen</td>
+                        <td>><a href="https://api.aquon.nl">https://api.aquon.nl<i class="bi bi-arrow-up-right-square"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>WADAR (RWS)</td>
+                        <td>Gepland</td>
+                        <td>Ontsluiting van chemische data van RWS</td>
+                        <td>Onbekend</td>
+                    </tr>
+                </table>
+        
+        
+                <div class="row">
+                    <h2>Gebruik</h2>
+                </div>
+                <div class="row">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 200px">
+                            <col style="width: 200px">
+                            <col style="width: 400px">
+                            <col>
+                        </colgroup>
+                        <tr>
+                            <th>Project</th>
+                            <th>Status</th>
+                            <th>Beschrijving</th>
+                            <th>Toegang</th>
+                        </tr>
+                        <tr>
+                            <td>Slim Watermanagement</td>
+                            <td>Gepland</td>
+                            <td>Algemeen portaal voor waterbeheerders</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Waterkwaliteit-portaal</td>
+                            <td>Gepland</td>
+                            <td>Waterkwaliteit-portaal gaat gebruik maken van DD-API V3</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>RWS WaterInfo portalen</td>
+                            <td>Gepland</td>
+                            <td>WaterInfo gaat gebruik maken van o.a. de DD-API V3's voor AquaDesk, SOVOn, WMR en WADAR</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Gegevensknooppunt Waterschappen</td>
+                            <td>In onderzoek</td>
+                            <td>Gebruikt DD-API V3 implementaties van diverse leveranciers en waterbeheerders</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+        </body>
+        
+        </html>
+        
+        
+        
+
+        <div class="row">
+            <h2>Gebruik</h2>
+        </div>
+        <div class="row">
+            <table class="table">
+                <colgroup>
+                    <col style="width: 200px">
+                    <col style="width: 200px">
+                    <col style="width: 400px">
+                    <col>
+                </colgroup>
+                <tr>
+                    <th>Project</th>
+                    <th>Status</th>
+                    <th>Beschrijving</th>
+                    <th>Toegang</th>
+                </tr>
+                <tr>
+                    <td>Slim Watermanagement</td>
+                    <td>Gepland</td>
+                    <td>Algemeen portaal voor waterbeheerders</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Waterkwaliteit-portaal</td>
+                    <td>Gepland</td>
+                    <td>Waterkwaliteit-portaal gaat gebruik maken van DD-API V3</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>RWS WaterInfo portalen</td>
+                    <td>Gepland</td>
+                    <td>WaterInfo gaat gebruik maken van o.a. de DD-API V3's voor AquaDesk, SOVOn, WMR en WADAR</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Gegevensknooppunt Waterschappen</td>
+                    <td>In onderzoek</td>
+                    <td>Gebruikt DD-API V3 implementaties van diverse leveranciers en waterbeheerders</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+</body>
+
 </html>
-
-
-
