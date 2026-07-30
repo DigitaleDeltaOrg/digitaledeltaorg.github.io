@@ -12,11 +12,13 @@ jobs:
           ref: master
 
       # Genereert volledig automatisch en recursief indexen in 'definitions'
-      # De root-map wordt hierdoor absoluut niet geraakt of blootgesteld.
       - name: Generate Index for Definitions and Subfolders
         run: |
+          # MAAKT .NOJEKYLL AAN: Schakelt de foutieve CSS-injectie van GitHub Pages uit
+          touch .nojekyll
+
           find definitions -type d | while read -r dir; do
-            echo "<html><body><h1>Index van /$dir</h1><ul>" > "$dir/index.html"
+            echo "<html><head><style>body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:30px;max-width:800px;margin:0 auto;color:#333;}ul{list-style:none;padding:0;}li{padding:8px 0;border-bottom:1px solid #eee;}a{text-decoration:none;color:#0366d6;}a:hover{text-decoration:underline;}</style></head><body><h1>Index van /$dir</h1><ul>" > "$dir/index.html"
             if [ "$dir" != "definitions" ]; then
               echo "<li><a href='../'>.. (Omhoog)</a></li>" >> "$dir/index.html"
             fi
@@ -32,6 +34,7 @@ jobs:
             done
             echo "</ul></body></html>" >> "$dir/index.html"
           done
+
 
       - name: Upload artifact
         id: deployment
