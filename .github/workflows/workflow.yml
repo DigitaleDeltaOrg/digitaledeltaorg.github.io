@@ -18,6 +18,7 @@ jobs:
         with:
           target: ./definitions
           overwrite: true
+          allowed_extensions: 'json,csdl,xml,xsd,html,txt,svg,png' 
 
       - name: Upload artifact
         id: deployment
