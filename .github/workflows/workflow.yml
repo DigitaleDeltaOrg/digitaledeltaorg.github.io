@@ -16,7 +16,7 @@ jobs:
       - name: Generate Index for Definitions and Subfolders
         run: |
           find definitions -type d | while read -r dir; do
-            echo "<html><body><h1>Index van /$dir</h1><ul>" > "$dir/index.html"
+            echo "<html><style type="text/css">body{font-family: Arial, sans-serif;}</style><body><h1>Index van /$dir</h1><ul>" > "$dir/index.html"
             if [ "$dir" != "definitions" ]; then
               echo "<li><a href='../'>.. (Omhoog)</a></li>" >> "$dir/index.html"
             fi
