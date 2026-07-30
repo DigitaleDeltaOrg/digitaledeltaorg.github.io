@@ -1,0 +1,1 @@
+# DigitaleDelta Definitions
