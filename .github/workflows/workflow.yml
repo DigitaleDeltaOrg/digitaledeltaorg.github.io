@@ -6,25 +6,29 @@ jobs:
     runs-on: ubuntu-latest
     name: Directory Listings Index
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          ref: master
-
-      # Gecorrigeerde stap: scant recursief alles binnen 'definitions'
-      # en overschrijft eventuele oude indexbestanden.
-      - name: Generate Directory Listings Recursively
-        uses: gacts/directory-listing@v1
-        with:
-          target: ./definitions
-          overwrite: true
-          allowed_extensions: 'json,csdl,xml,xsd,html,txt,svg,png' 
-
-      - name: Upload artifact
-        id: deployment
-        uses: actions/upload-pages-artifact@v3.0.1
-        with:
-          path: .                 # Uploadt de complete repository inclusief de nieuwe indexen
+      - name: Generate Index for Definitions and Subfolders
+        run: |
+          # Dit script loopt door 'definitions' en alle submappen
+          find definitions -type d | while read -r dir; do
+            echo "<html><body><h1>Index van /$dir</h1><ul>" > "$dir/index.html"
+            # Voeg een link naar de bovenliggende map toe (behalve in de hoofdmap zelf)
+            if [ "$dir" != "definitions" ]; then
+              echo "<li><a href='../'>.. (Omhoog)</a></li>" >> "$dir/index.html"
+            fi
+            # Lus door alle bestanden en mappen in deze specifieke directory
+            for item in "$dir"/*; do
+              name=$(basename "$item")
+              # Sla de index.html zelf over
+              if [ "$name" != "index.html" ] && [ -e "$item" ]; then
+                if [ -d "$item" ]; then
+                  echo "<li><a href='$name/'>📁 $name/</a></li>" >> "$dir/index.html"
+                else
+                  echo "<li><a href='$name'>📄 $name</a></li>" >> "$dir/index.html"
+                fi
+              fi
+            done
+            echo "</ul></body></html>" >> "$dir/index.html"
+          done
 
   deploy:
     needs: pages-directory-listing
