@@ -9,30 +9,29 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          ref: master   #checkout different branch
+          ref: master
 
       - name: Generate Directory Listings
         uses: jayanta525/github-pages-directory-listing@v4.0.0
         with:
-          FOLDER: definitions      #directory to generate index
+          FOLDER: definitions
 
       - name: Upload artifact
+        id: deployment             # VERPLICHT: Geeft een ID aan dit artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: definitions      # upload generated folder         
- 
+          path: .                 # GEWELDIG BELANGRIJK: Een punt (.) uploadt de hele structuur
+
   deploy:
     needs: pages-directory-listing
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write
+      id-token: write
 
-    # Deploy to the github-pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
