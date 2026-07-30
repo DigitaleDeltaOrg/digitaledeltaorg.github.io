@@ -15,6 +15,11 @@ jobs:
         uses: jayanta525/github-pages-directory-listing@v4.0.0
         with:
           FOLDER: definitions      #directory to generate index
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: definitions      # upload generated folder         
  
   deploy:
     needs: pages-directory-listing
