@@ -11,16 +11,19 @@ jobs:
         with:
           ref: master
 
-      - name: Generate Directory Listings
-        uses: jayanta525/github-pages-directory-listing@v4.0.0
+      # Gecorrigeerde stap: scant recursief alles binnen 'definitions'
+      # en overschrijft eventuele oude indexbestanden.
+      - name: Generate Directory Listings Recursively
+        uses: gacts/directory-listing@v1
         with:
-          FOLDER: definitions
+          target: ./definitions
+          overwrite: true
 
       - name: Upload artifact
-        id: deployment             # VERPLICHT: Geeft een ID aan dit artifact
+        id: deployment
         uses: actions/upload-pages-artifact@v3.0.1
         with:
-          path: .                 # GEWELDIG BELANGRIJK: Een punt (.) uploadt de hele structuur
+          path: .                 # Uploadt de complete repository inclusief de nieuwe indexen
 
   deploy:
     needs: pages-directory-listing
@@ -37,3 +40,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.0
+
