@@ -6,19 +6,22 @@ jobs:
     runs-on: ubuntu-latest
     name: Directory Listings Index
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      # Genereert volledig automatisch en recursief indexen in 'definitions'
+      # De root-map wordt hierdoor absoluut niet geraakt of blootgesteld.
       - name: Generate Index for Definitions and Subfolders
         run: |
-          # Dit script loopt door 'definitions' en alle submappen
           find definitions -type d | while read -r dir; do
             echo "<html><body><h1>Index van /$dir</h1><ul>" > "$dir/index.html"
-            # Voeg een link naar de bovenliggende map toe (behalve in de hoofdmap zelf)
             if [ "$dir" != "definitions" ]; then
               echo "<li><a href='../'>.. (Omhoog)</a></li>" >> "$dir/index.html"
             fi
-            # Lus door alle bestanden en mappen in deze specifieke directory
             for item in "$dir"/*; do
               name=$(basename "$item")
-              # Sla de index.html zelf over
               if [ "$name" != "index.html" ] && [ -e "$item" ]; then
                 if [ -d "$item" ]; then
                   echo "<li><a href='$name/'>📁 $name/</a></li>" >> "$dir/index.html"
@@ -29,6 +32,12 @@ jobs:
             done
             echo "</ul></body></html>" >> "$dir/index.html"
           done
+
+      - name: Upload artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: .
 
   deploy:
     needs: pages-directory-listing
@@ -45,4 +54,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.0
-
